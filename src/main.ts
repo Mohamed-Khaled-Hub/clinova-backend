@@ -18,6 +18,8 @@ const logger = new Logger(`${apiName} API`)
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
 
+    app.enableCors({})
+
     const config = new DocumentBuilder()
         .setTitle(`${apiName} API`)
         .setDescription(
