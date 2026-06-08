@@ -1,11 +1,13 @@
 // Core
 import 'dotenv/config'
 import { JwtModule } from '@nestjs/jwt'
-import { Module } from '@nestjs/common'
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
 import { APP_GUARD } from '@nestjs/core'
 import { MongooseModule } from '@nestjs/mongoose'
 // Guards
 import { AuthGuard } from '@/modules/auth/guards/auth.guard'
+// Middlewares
+import { LoggerMiddleware } from '@/common/middleware/logger.middleware'
 // Modules
 import { AuthModule } from '@/modules/auth/auth.module'
 import { ExpenseModule } from '@/modules/expense/expense.module'
@@ -42,4 +44,8 @@ const databaseUrl = process.env.DATABASE_URL as string
         },
     ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(LoggerMiddleware).forRoutes('*')
+    }
+}
