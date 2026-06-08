@@ -1,0 +1,18 @@
+export enum RolesEnum {
+    SUPER_ADMIN = 'SUPER_ADMIN',
+    ADMIN = 'ADMIN',
+    DOCTOR = 'DOCTOR',
+    RECEPTIONIST = 'RECEPTIONIST',
+}
+
+export enum PermissionsEnum {
+    USER = 'USER',
+    ROLE = 'ROLE',
+    PERMISSION = 'PERMISSION',
+    PRICE_CATALOG = 'PRICE_CATALOG',
+    REVENUE = 'REVENUE',
+    EXPENSE = 'EXPENSE',
+    PATIENT = 'PATIENT',
+    VISIT = 'VISIT',
+    SETTINGS = 'SETTINGS',
+}
