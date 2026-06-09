@@ -4,6 +4,7 @@ import {
     Injectable,
     ForbiddenException,
     UnauthorizedException,
+    BadRequestException,
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 // DTOs
@@ -160,6 +161,16 @@ export class AuthService {
         )
         if (!isOldPasswordValid)
             throw new UnauthorizedException('Invalid current password')
+
+        const isSamePassword = await bcrypt.compare(
+            changePasswordDto.newPassword,
+            userWithSecrets.passwordHash
+        )
+        if (isSamePassword) {
+            throw new BadRequestException(
+                'New password cannot be the same as your current password'
+            )
+        }
 
         const salt = await bcrypt.genSalt()
         const newPasswordHash = await bcrypt.hash(
