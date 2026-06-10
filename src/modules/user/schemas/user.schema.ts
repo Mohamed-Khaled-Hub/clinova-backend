@@ -29,7 +29,7 @@ export type PopulatedUserDocument = Omit<UserDocument, 'roleId'> & {
 // Schema
 @Schema({ timestamps: true, versionKey: false })
 export class User {
-    @Prop({ required: true, unique: true })
+    @Prop({ required: true, lowercase: true, unique: true })
     username: string
 
     @Prop({ required: true })

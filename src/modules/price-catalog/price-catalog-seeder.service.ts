@@ -18,7 +18,7 @@ export class PriceCatalogSeederService implements OnModuleInit {
         const existingCatalogs = await this.priceCatalogService.findAll()
         if (existingCatalogs && existingCatalogs.length > 0) {
             this.logger.debug(
-                'Database price catalogs are already initialized. Skipping price catalog seeder lifecycle.'
+                'Database price catalog are already initialized. Skipping price catalog seeder lifecycle.'
             )
             return
         }

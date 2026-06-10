@@ -24,7 +24,7 @@ export class PriceCatalogService {
         private readonly priceCatalogModel: Model<PriceCatalogDocument>
     ) {}
 
-    // POST /price-catalogs
+    // POST /price-catalog
     async create(
         createPriceCatalogDto: CreatePriceCatalogDto
     ): Promise<PriceCatalogDocument> {
@@ -32,24 +32,24 @@ export class PriceCatalogService {
         return await createdCatalog.save()
     }
 
-    // GET /price-catalogs
+    // GET /price-catalog
     async findAll(): Promise<PriceCatalogDocument[]> {
         return this.priceCatalogModel.find().exec()
     }
 
-    // GET /price-catalogs/:id
+    // GET /price-catalog/:id
     async findOne(id: string): Promise<PriceCatalogDocument | null> {
         return this.priceCatalogModel.findById(id).exec()
     }
 
-    // GET /price-catalogs/type/:visitType
+    // GET /price-catalog/type/:visitType
     async findByVisitType(
         visitType: VisitCategoryEnum
     ): Promise<PriceCatalogDocument | null> {
         return this.priceCatalogModel.findOne({ visitType }).exec()
     }
 
-    // GET /price-catalogs/price/:visitType
+    // GET /price-catalog/price/:visitType
     async getPriceByVisitType(
         visitType: VisitCategoryEnum
     ): Promise<number | null> {
@@ -59,7 +59,7 @@ export class PriceCatalogService {
         return catalog ? catalog.basePrice : null
     }
 
-    // PATCH /price-catalogs/:id
+    // PATCH /price-catalog/:id
     async update(
         id: string,
         updatePriceCatalogDto: UpdatePriceCatalogDto
@@ -87,7 +87,7 @@ export class PriceCatalogService {
             .exec()
     }
 
-    // DELETE /price-catalogs/:id
+    // DELETE /price-catalog/:id
     async remove(id: string): Promise<PriceCatalogDocument | null> {
         return this.priceCatalogModel.findByIdAndDelete(id).exec()
     }

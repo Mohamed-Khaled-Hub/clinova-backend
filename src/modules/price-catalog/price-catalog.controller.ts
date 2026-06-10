@@ -36,7 +36,7 @@ import { PriceCatalogService } from '@/modules/price-catalog/price-catalog.servi
 export class PriceCatalogController {
     constructor(private readonly priceCatalogService: PriceCatalogService) {}
 
-    // POST /price-catalogs
+    // POST /price-catalog
     @Post()
     @RequirePermission(PermissionsEnum.PRICE_CATALOG, 'canWrite')
     async create(
@@ -45,14 +45,14 @@ export class PriceCatalogController {
         return this.priceCatalogService.create(createPriceCatalogDto)
     }
 
-    // GET /price-catalogs
+    // GET /price-catalog
     @Get()
     @RequirePermission(PermissionsEnum.PRICE_CATALOG, 'canRead')
     async findAll(): Promise<PriceCatalogDocument[]> {
         return this.priceCatalogService.findAll()
     }
 
-    // GET /price-catalogs/:id
+    // GET /price-catalog/:id
     @Get(':id')
     @RequirePermission(PermissionsEnum.PRICE_CATALOG, 'canRead')
     async findOne(@Param('id') id: string): Promise<PriceCatalogDocument> {
@@ -62,7 +62,7 @@ export class PriceCatalogController {
         return catalog
     }
 
-    // GET /price-catalogs/type/:visitType
+    // GET /price-catalog/type/:visitType
     @Get('type/:visitType')
     @RequirePermission(PermissionsEnum.PRICE_CATALOG, 'canRead')
     async findByVisitType(
@@ -77,7 +77,7 @@ export class PriceCatalogController {
         return catalog
     }
 
-    // GET /price-catalogs/price/:visitType
+    // GET /price-catalog/price/:visitType
     @Get('price/:visitType')
     @RequirePermission(PermissionsEnum.PRICE_CATALOG, 'canRead')
     async getPriceValue(
@@ -93,7 +93,7 @@ export class PriceCatalogController {
         return { price }
     }
 
-    // PATCH /price-catalogs/:id
+    // PATCH /price-catalog/:id
     @Patch(':id')
     @RequirePermission(PermissionsEnum.PRICE_CATALOG, 'canWrite')
     async update(
@@ -109,7 +109,7 @@ export class PriceCatalogController {
         return updatedCatalog
     }
 
-    // DELETE /price-catalogs/:id
+    // DELETE /price-catalog/:id
     @Delete(':id')
     @RequirePermission(PermissionsEnum.PRICE_CATALOG, 'canWrite')
     async remove(@Param('id') id: string): Promise<MessageResponse> {

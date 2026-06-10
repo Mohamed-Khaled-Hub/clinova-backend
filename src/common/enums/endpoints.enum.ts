@@ -3,7 +3,7 @@ export enum EndpointsEnum {
     USER = 'users',
     ROLE = 'roles',
     PERMISSION = 'permissions',
-    PRICE_CATALOG = 'price-catalogs',
+    PRICE_CATALOG = 'price-catalog',
     REVENUE = 'revenues',
     EXPENSE = 'expenses',
     PATIENT = 'patients',
