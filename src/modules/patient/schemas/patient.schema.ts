@@ -41,7 +41,7 @@ export class Patient {
     })
     socialStatus: SocialStatusEnum
 
-    @Prop({ type: String, enum: ReferralEnum, default: ReferralEnum.WALK_IN })
+    @Prop({ type: String, enum: ReferralEnum, default: ReferralEnum.OTHER })
     referralSource: ReferralEnum
 
     @Prop({ type: String })

@@ -18,9 +18,10 @@ export enum SocialStatusEnum {
 }
 
 export enum ReferralEnum {
-    SOCIAL_MEDIA = 'SOCIAL_MEDIA',
     FRIEND = 'FRIEND',
-    WALK_IN = 'WALK_IN',
+    SOCIAL_MEDIA = 'SOCIAL_MEDIA',
+    DOCTOR = 'DOCTOR',
+    ADVERTISEMENT = 'ADVERTISEMENT',
     OTHER = 'OTHER',
 }
 
