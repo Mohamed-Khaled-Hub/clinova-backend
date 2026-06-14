@@ -4,7 +4,7 @@ import { HydratedDocument, Schema as MongooseSchema } from 'mongoose'
 // Enums
 import {
     GenderEnum,
-    SocialStatusEnum,
+    MaritalStatusEnum,
     ReferralEnum,
 } from '@/common/enums/schemas.enum'
 // Types
@@ -36,10 +36,10 @@ export class Patient {
 
     @Prop({
         type: String,
-        enum: SocialStatusEnum,
-        default: SocialStatusEnum.SINGLE,
+        enum: MaritalStatusEnum,
+        default: MaritalStatusEnum.SINGLE,
     })
-    socialStatus: SocialStatusEnum
+    maritalStatus: MaritalStatusEnum
 
     @Prop({ type: String, enum: ReferralEnum, default: ReferralEnum.OTHER })
     referralSource: ReferralEnum

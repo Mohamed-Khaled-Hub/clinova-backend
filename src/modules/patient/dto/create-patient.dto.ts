@@ -14,7 +14,7 @@ import { IsEgyptianPhone } from '@/common/decorators/egyptian-phone.decorator'
 // Enums
 import {
     GenderEnum,
-    SocialStatusEnum,
+    MaritalStatusEnum,
     ReferralEnum,
 } from '@/common/enums/schemas.enum'
 // Types
@@ -48,8 +48,8 @@ export class CreatePatientDto {
     nationality?: string
 
     @IsOptional()
-    @IsEnum(SocialStatusEnum)
-    socialStatus?: SocialStatusEnum
+    @IsEnum(MaritalStatusEnum)
+    maritalStatus?: MaritalStatusEnum
 
     @IsOptional()
     @IsEnum(ReferralEnum)

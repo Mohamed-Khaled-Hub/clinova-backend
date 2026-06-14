@@ -10,7 +10,7 @@ export enum GenderEnum {
     FEMALE = 'FEMALE',
 }
 
-export enum SocialStatusEnum {
+export enum MaritalStatusEnum {
     SINGLE = 'SINGLE',
     MARRIED = 'MARRIED',
     DIVORCED = 'DIVORCED',
