@@ -78,6 +78,12 @@ export class UserController {
         return this.userService.findAll()
     }
 
+    // GET /users/doctors
+    @Get('doctors')
+    async findAllDoctors(): Promise<PopulatedUserDocument[]> {
+        return this.userService.findAllDoctors()
+    }
+
     // GET /users/:id
     @Get(':id')
     @RequirePermission(PermissionsEnum.USER, 'canRead')

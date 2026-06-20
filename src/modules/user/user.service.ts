@@ -235,6 +235,20 @@ export class UserService {
             .exec()
     }
 
+    // GET /users/doctors
+    async findAllDoctors(): Promise<PopulatedUserDocument[]> {
+        return this.userModel
+            .aggregate<PopulatedUserDocument>([
+                ...this.getPopulatedUserPipeline({}, false),
+                {
+                    $match: {
+                        'role.roleName': String(RolesEnum.DOCTOR),
+                    },
+                },
+            ])
+            .exec()
+    }
+
     // GET /users/:id & GET /users/me
     async findOne(
         id: string,
