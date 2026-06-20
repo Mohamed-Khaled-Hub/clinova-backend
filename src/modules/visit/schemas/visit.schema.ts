@@ -103,3 +103,5 @@ export class Visit {
 }
 
 export const VisitSchema = SchemaFactory.createForClass(Visit)
+
+VisitSchema.index({ 'notes.noteText': 1 })

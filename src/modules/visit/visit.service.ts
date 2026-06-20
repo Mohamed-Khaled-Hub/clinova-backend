@@ -1,7 +1,7 @@
 // Core
 import { Injectable, BadRequestException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Model, PopulateOptions, Types } from 'mongoose'
+import { Model, PopulateOptions, QueryFilter, Types } from 'mongoose'
 // DTOs
 import { CreateVisitDto } from '@/modules/visit/dto/create-visit.dto'
 import { UpdateVisitDto } from '@/modules/visit/dto/update-visit.dto'
@@ -96,6 +96,29 @@ export class VisitService {
         return visits
             .map((visit) => this.mapToPopulatedVisit(visit))
             .filter((visit): visit is PopulatedVisitDocument => visit !== null)
+    }
+
+    // GET /visits/notes/suggestions?search=...
+    async getNoteSuggestions(search?: string): Promise<string[]> {
+        const query: QueryFilter<VisitDocument> = {}
+
+        if (search) {
+            query['notes.noteText'] = { $regex: `^${search}`, $options: 'i' }
+        }
+
+        const suggestions = await this.visitModel
+            .distinct('notes.noteText', query)
+            .exec()
+
+        return suggestions.filter((text): text is string => {
+            if (typeof text !== 'string' || text.trim() === '') return false
+
+            if (search) {
+                return text.toLowerCase().startsWith(search.toLowerCase())
+            }
+
+            return true
+        })
     }
 
     // GET /visits/:id

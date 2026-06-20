@@ -7,6 +7,7 @@ import {
     Body,
     Param,
     Patch,
+    Query,
     UseGuards,
     NotFoundException,
 } from '@nestjs/common'
@@ -46,6 +47,15 @@ export class VisitController {
     @RequirePermission(PermissionsEnum.VISIT, 'canRead')
     async findAll(): Promise<PopulatedVisitDocument[]> {
         return this.visitService.findAll()
+    }
+
+    // GET /visits/notes/suggestions?search=...
+    @Get('notes/suggestions')
+    @RequirePermission(PermissionsEnum.VISIT, 'canRead')
+    async getNoteSuggestions(
+        @Query('search') search?: string
+    ): Promise<string[]> {
+        return this.visitService.getNoteSuggestions(search)
     }
 
     // GET /visits/:id
