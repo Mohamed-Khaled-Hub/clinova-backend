@@ -1,6 +1,8 @@
 // Core
 import {
+    Inject,
     Injectable,
+    forwardRef,
     NotFoundException,
     BadRequestException,
 } from '@nestjs/common'
@@ -24,6 +26,7 @@ export class RevenueService {
     constructor(
         @InjectModel(Revenue.name)
         private readonly revenueModel: Model<RevenueDocument>,
+        @Inject(forwardRef(() => VisitService))
         private readonly visitService: VisitService,
         private readonly priceCatalogService: PriceCatalogService
     ) {}

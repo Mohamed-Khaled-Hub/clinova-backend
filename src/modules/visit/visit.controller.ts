@@ -10,6 +10,7 @@ import {
     Query,
     UseGuards,
     NotFoundException,
+    Req,
 } from '@nestjs/common'
 // Decorators
 import { RequirePermission } from '@/modules/permission/decorators/permission.decorator'
@@ -22,6 +23,7 @@ import { EndpointsEnum } from '@/common/enums/endpoints.enum'
 // Guards
 import { RoleGuard } from '@/modules/role/guards/role.guard'
 // Interfaces
+import type { AuthenticatedRequest } from '@/modules/auth/interfaces/auth.interface'
 import { MessageResponse } from '@/common/interfaces/response.interface'
 // Schemas
 import { PopulatedVisitDocument } from '@/modules/visit/schemas/visit.schema'
@@ -37,9 +39,10 @@ export class VisitController {
     @Post()
     @RequirePermission(PermissionsEnum.VISIT, 'canWrite')
     async create(
-        @Body() createVisitDto: CreateVisitDto
+        @Body() createVisitDto: CreateVisitDto,
+        @Req() req: AuthenticatedRequest
     ): Promise<PopulatedVisitDocument> {
-        return this.visitService.create(createVisitDto)
+        return this.visitService.create(createVisitDto, req.user.sub)
     }
 
     // GET /visits

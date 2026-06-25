@@ -1,5 +1,10 @@
 // Core
-import { Injectable, BadRequestException } from '@nestjs/common'
+import {
+    Inject,
+    Injectable,
+    forwardRef,
+    BadRequestException,
+} from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model, PopulateOptions, QueryFilter, Types } from 'mongoose'
 // DTOs
@@ -15,12 +20,15 @@ import {
 } from '@/modules/visit/schemas/visit.schema'
 // Services
 import { UserService } from '@/modules/user/user.service'
+import { RevenueService } from '@/modules/revenue/revenue.service'
 
 @Injectable()
 export class VisitService {
     constructor(
         @InjectModel(Visit.name)
         private readonly visitModel: Model<VisitDocument>,
+        @Inject(forwardRef(() => RevenueService))
+        private readonly revenueService: RevenueService,
         private readonly userService: UserService
     ) {}
 
@@ -72,7 +80,8 @@ export class VisitService {
 
     // POST /visits
     async create(
-        createVisitDto: CreateVisitDto
+        createVisitDto: CreateVisitDto,
+        userId: string
     ): Promise<PopulatedVisitDocument> {
         await this.validateDoctorRole(createVisitDto.doctorId)
 
@@ -82,6 +91,14 @@ export class VisitService {
             doctorId: new Types.ObjectId(createVisitDto.doctorId),
         })
         const savedVisit = await createdVisit.save()
+
+        await this.revenueService.create(
+            {
+                visitId: savedVisit._id.toString(),
+            },
+            userId
+        )
+
         const populated = await savedVisit.populate(this.getStandardPopulate())
         return this.mapToPopulatedVisit(populated) as PopulatedVisitDocument
     }

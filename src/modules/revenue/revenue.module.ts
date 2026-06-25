@@ -1,5 +1,5 @@
 // Core
-import { Module } from '@nestjs/common'
+import { Module, forwardRef } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Controllers
 import { RevenueController } from '@/modules/revenue/revenue.controller'
@@ -19,7 +19,7 @@ import { RevenueService } from '@/modules/revenue/revenue.service'
         MongooseModule.forFeature([
             { name: Revenue.name, schema: RevenueSchema },
         ]),
-        VisitModule,
+        forwardRef(() => VisitModule),
         PriceCatalogModule,
     ],
     controllers: [RevenueController],
