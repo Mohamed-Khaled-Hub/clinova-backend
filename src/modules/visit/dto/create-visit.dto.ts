@@ -13,6 +13,9 @@ import {
     IsObject,
 } from 'class-validator'
 import { Type } from 'class-transformer'
+import { OmitType } from '@nestjs/mapped-types'
+// DTOs
+import { CreateRevenueDto } from '@/modules/revenue/dto/create-revenue.dto'
 // Enums
 import {
     VisitCategoryEnum,
@@ -20,6 +23,10 @@ import {
 } from '@/common/enums/schemas.enum'
 // Types
 import { CustomFieldsType } from '@/common/types/schemas.type'
+
+export class NestedRevenueDetailsDto extends OmitType(CreateRevenueDto, [
+    'visitId',
+] as const) {}
 
 export class VisitNoteDto {
     @IsNotEmpty()
@@ -98,4 +105,9 @@ export class CreateVisitDto {
     @IsOptional()
     @IsObject()
     customFields?: Record<string, CustomFieldsType>
+
+    @IsOptional()
+    @ValidateNested()
+    @Type(() => NestedRevenueDetailsDto)
+    revenueDetails?: NestedRevenueDetailsDto
 }

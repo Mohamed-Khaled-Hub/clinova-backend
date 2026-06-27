@@ -85,8 +85,10 @@ export class VisitService {
     ): Promise<PopulatedVisitDocument> {
         await this.validateDoctorRole(createVisitDto.doctorId)
 
+        const { revenueDetails, ...visitData } = createVisitDto
+
         const createdVisit = new this.visitModel({
-            ...createVisitDto,
+            ...visitData,
             patientId: new Types.ObjectId(createVisitDto.patientId),
             doctorId: new Types.ObjectId(createVisitDto.doctorId),
         })
@@ -94,6 +96,7 @@ export class VisitService {
 
         await this.revenueService.create(
             {
+                ...revenueDetails,
                 visitId: savedVisit._id.toString(),
             },
             userId
