@@ -15,4 +15,5 @@ export enum PermissionsEnum {
     PATIENT = 'PATIENT',
     VISIT = 'VISIT',
     SETTINGS = 'SETTINGS',
+    FINANCE = 'FINANCE',
 }

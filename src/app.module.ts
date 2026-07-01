@@ -19,6 +19,7 @@ import { RoleModule } from '@/modules/role/role.module'
 import { SettingsModule } from '@/modules/settings/settings.module'
 import { UserModule } from '@/modules/user/user.module'
 import { VisitModule } from '@/modules/visit/visit.module'
+import { FinanceModule } from './modules/finance/finance.module'
 
 const databaseUrl = process.env.DATABASE_URL as string
 
@@ -36,6 +37,7 @@ const databaseUrl = process.env.DATABASE_URL as string
         RevenueModule,
         ExpenseModule,
         PatientModule,
+        FinanceModule,
     ],
     providers: [
         {

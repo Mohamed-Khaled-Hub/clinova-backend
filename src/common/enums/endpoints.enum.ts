@@ -9,4 +9,5 @@ export enum EndpointsEnum {
     PATIENT = 'patients',
     VISIT = 'visits',
     SETTINGS = 'settings',
+    FINANCE = 'finance',
 }
