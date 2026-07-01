@@ -20,6 +20,7 @@ import { UpdateVisitDto } from '@/modules/visit/dto/update-visit.dto'
 // Enums
 import { PermissionsEnum } from '@/common/enums/roles-permissions.enum'
 import { EndpointsEnum } from '@/common/enums/endpoints.enum'
+import { NoteCategoryEnum } from '@/common/enums/schemas.enum'
 // Guards
 import { RoleGuard } from '@/modules/role/guards/role.guard'
 // Interfaces
@@ -52,13 +53,14 @@ export class VisitController {
         return this.visitService.findAll()
     }
 
-    // GET /visits/notes/suggestions?search=...
+    // GET /visits/notes/suggestions?search=...&noteType=NoteCategoryEnum
     @Get('notes/suggestions')
     @RequirePermission(PermissionsEnum.VISIT, 'canRead')
     async getNoteSuggestions(
-        @Query('search') search?: string
+        @Query('search') search?: string,
+        @Query('category') category?: NoteCategoryEnum
     ): Promise<string[]> {
-        return this.visitService.getNoteSuggestions(search)
+        return this.visitService.getNoteSuggestions(search, category)
     }
 
     // GET /visits/:id

@@ -6,12 +6,13 @@ import {
     BadRequestException,
 } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Model, PopulateOptions, QueryFilter, Types } from 'mongoose'
+import { Model, PopulateOptions, PipelineStage, Types } from 'mongoose'
 // DTOs
 import { CreateVisitDto } from '@/modules/visit/dto/create-visit.dto'
 import { UpdateVisitDto } from '@/modules/visit/dto/update-visit.dto'
 // Enums
 import { RolesEnum } from '@/common/enums/roles-permissions.enum'
+import { NoteCategoryEnum } from '@/common/enums/schemas.enum'
 // Schemas
 import {
     Visit,
@@ -118,20 +119,57 @@ export class VisitService {
             .filter((visit): visit is PopulatedVisitDocument => visit !== null)
     }
 
-    // GET /visits/notes/suggestions?search=...
-    async getNoteSuggestions(search?: string): Promise<string[]> {
-        const query: QueryFilter<VisitDocument> = {}
+    // GET /visits/notes/suggestions?search=...&category=NoteCategoryEnum
+    async getNoteSuggestions(
+        search?: string,
+        category?: NoteCategoryEnum
+    ): Promise<string[]> {
+        const pipeline: PipelineStage[] = []
 
+        const matchCriteria: Record<string, any> = {}
+        if (category || search) {
+            const elemCriteria: Record<string, any> = {}
+            if (category) elemCriteria['category'] = category
+            if (search)
+                elemCriteria['noteText'] = {
+                    $regex: `^${search}`,
+                    $options: 'i',
+                }
+
+            matchCriteria['notes'] = { $elemMatch: elemCriteria }
+        }
+        pipeline.push({ $match: matchCriteria })
+        pipeline.push({ $unwind: '$notes' })
+
+        const finalMatchCriteria: Record<string, any> = {}
+        if (category) {
+            finalMatchCriteria['notes.category'] = category
+        }
         if (search) {
-            query['notes.noteText'] = { $regex: `^${search}`, $options: 'i' }
+            finalMatchCriteria['notes.noteText'] = {
+                $regex: `^${search}`,
+                $options: 'i',
+            }
         }
 
-        const suggestions = await this.visitModel
-            .distinct('notes.noteText', query)
-            .exec()
+        if (Object.keys(finalMatchCriteria).length > 0) {
+            pipeline.push({ $match: finalMatchCriteria })
+        }
 
+        pipeline.push({
+            $group: {
+                _id: '$notes.noteText',
+            },
+        })
+
+        const rawResults = await this.visitModel
+            .aggregate<{ _id: string }>(pipeline)
+            .exec()
+        const suggestions = rawResults.map((item) => item._id)
+
+        // 5. Clean arrays and perform runtime validation
         return suggestions.filter((text): text is string => {
-            if (typeof text !== 'string' || text.trim() === '') return false
+            if (text.trim() === '') return false
 
             if (search) {
                 return text.toLowerCase().startsWith(search.toLowerCase())
