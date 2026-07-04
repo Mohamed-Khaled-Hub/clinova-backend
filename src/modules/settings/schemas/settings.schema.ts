@@ -43,6 +43,12 @@ export class Settings {
     @Prop({ trim: true })
     logoUrl: string
 
+    @Prop({ trim: true })
+    secondaryLogoUrl?: string
+
+    @Prop({ trim: true })
+    watermarkUrl?: string
+
     @Prop({ type: Map, of: MongooseSchema.Types.Mixed, default: {} })
     customFields: Map<string, CustomFieldsType>
 }

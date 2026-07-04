@@ -24,6 +24,24 @@ export class SettingsService {
         private readonly cloudinaryService: CloudinaryService
     ) {}
 
+    // Helpers
+    private async deleteCloudinaryImage(
+        url: string,
+        folder: string
+    ): Promise<void> {
+        try {
+            const urlParts = url.split('/')
+            const fileNameWithExtension = urlParts[urlParts.length - 1]
+            const [publicId] = fileNameWithExtension.split('.')
+            await this.cloudinaryService.deleteImage(`${folder}/${publicId}`)
+        } catch (error) {
+            console.error(
+                `Failed to delete old image from Cloudinary inside ${folder}:`,
+                error
+            )
+        }
+    }
+
     // GET /settings
     async getSettings(): Promise<SettingsDocument> {
         let settings = await this.settingsModel
@@ -55,20 +73,10 @@ export class SettingsService {
         const currentSettings = await this.getSettings()
 
         if (currentSettings?.logoUrl) {
-            try {
-                const urlParts = currentSettings.logoUrl.split('/')
-                const fileNameWithExtension = urlParts[urlParts.length - 1]
-                const [publicId] = fileNameWithExtension.split('.')
-
-                await this.cloudinaryService.deleteImage(
-                    `clinic_logos/${publicId}`
-                )
-            } catch (error) {
-                console.error(
-                    'Failed to delete old logo from Cloudinary:',
-                    error
-                )
-            }
+            await this.deleteCloudinaryImage(
+                currentSettings.logoUrl,
+                'clinic_logos'
+            )
         }
 
         const uploadResult = await this.cloudinaryService.uploadImage(
@@ -80,6 +88,60 @@ export class SettingsService {
             .findByIdAndUpdate(
                 this.SETTINGS_ID,
                 { logoUrl: uploadResult.secure_url },
+                { returnDocument: 'after', upsert: true }
+            )
+            .exec()
+    }
+
+    // PATCH /settings/secondary-logo
+    async updateSecondaryLogo(
+        file: Express.Multer.File
+    ): Promise<SettingsDocument | null> {
+        const currentSettings = await this.getSettings()
+
+        if (currentSettings?.secondaryLogoUrl) {
+            await this.deleteCloudinaryImage(
+                currentSettings.secondaryLogoUrl,
+                'clinic_logos'
+            )
+        }
+
+        const uploadResult = await this.cloudinaryService.uploadImage(
+            file,
+            'clinic_logos'
+        )
+
+        return this.settingsModel
+            .findByIdAndUpdate(
+                this.SETTINGS_ID,
+                { secondaryLogoUrl: uploadResult.secure_url },
+                { returnDocument: 'after', upsert: true }
+            )
+            .exec()
+    }
+
+    // PATCH /settings/watermark
+    async updateWatermark(
+        file: Express.Multer.File
+    ): Promise<SettingsDocument | null> {
+        const currentSettings = await this.getSettings()
+
+        if (currentSettings?.watermarkUrl) {
+            await this.deleteCloudinaryImage(
+                currentSettings.watermarkUrl,
+                'clinic_watermarks'
+            )
+        }
+
+        const uploadResult = await this.cloudinaryService.uploadImage(
+            file,
+            'clinic_watermarks'
+        )
+
+        return this.settingsModel
+            .findByIdAndUpdate(
+                this.SETTINGS_ID,
+                { watermarkUrl: uploadResult.secure_url },
                 { returnDocument: 'after', upsert: true }
             )
             .exec()

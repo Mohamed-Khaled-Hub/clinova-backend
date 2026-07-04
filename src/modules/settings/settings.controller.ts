@@ -75,4 +75,51 @@ export class SettingsController {
         if (!updatedSettings) throw new NotFoundException('Settings not found')
         return updatedSettings
     }
+
+    // PATCH /settings/secondary-logo
+    @Patch('secondary-logo')
+    @RequirePermission(PermissionsEnum.SETTINGS, 'canWrite')
+    @UseInterceptors(FileInterceptor('file'))
+    async updateSecondaryLogo(
+        @UploadedFile(
+            new ParseFilePipe({
+                validators: [
+                    new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 3 }),
+                    new FileTypeValidator({
+                        fileType: '.(png|jpeg|jpg|webp|svg)',
+                    }),
+                ],
+                fileIsRequired: true,
+            })
+        )
+        file: Express.Multer.File
+    ): Promise<SettingsDocument> {
+        const updatedSettings =
+            await this.settingsService.updateSecondaryLogo(file)
+        if (!updatedSettings) throw new NotFoundException('Settings not found')
+        return updatedSettings
+    }
+
+    // PATCH /settings/watermark
+    @Patch('watermark')
+    @RequirePermission(PermissionsEnum.SETTINGS, 'canWrite')
+    @UseInterceptors(FileInterceptor('file'))
+    async updateWatermark(
+        @UploadedFile(
+            new ParseFilePipe({
+                validators: [
+                    new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 3 }),
+                    new FileTypeValidator({
+                        fileType: '.(png|jpeg|jpg|webp|svg)',
+                    }),
+                ],
+                fileIsRequired: true,
+            })
+        )
+        file: Express.Multer.File
+    ): Promise<SettingsDocument> {
+        const updatedSettings = await this.settingsService.updateWatermark(file)
+        if (!updatedSettings) throw new NotFoundException('Settings not found')
+        return updatedSettings
+    }
 }
