@@ -22,12 +22,14 @@ import {
 } from '@/modules/user/schemas/user.schema'
 // Services
 import { RoleService } from '@/modules/role/role.service'
+import { CloudinaryService } from '@/modules/cloudinary/cloudinary.service'
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
-        private readonly roleService: RoleService
+        private readonly roleService: RoleService,
+        private readonly cloudinaryService: CloudinaryService
     ) {}
 
     // Helpers
@@ -326,6 +328,30 @@ export class UserService {
                 roleId: new Types.ObjectId(updateUserRoleDto.roleId),
             })
             .exec()
+        return this.findOne(id)
+    }
+
+    // PATCH /users/me/avatar
+    async updateAvatar(
+        id: string,
+        file: Express.Multer.File
+    ): Promise<PopulatedUserDocument | null> {
+        const user = await this.userModel.findById(id).exec()
+        if (!user) {
+            throw new BadRequestException(
+                'User profile not found for avatar attachment.'
+            )
+        }
+
+        const uploadResult = await this.cloudinaryService.uploadImage(
+            file,
+            'user_avatars'
+        )
+
+        await this.userModel
+            .findByIdAndUpdate(id, { imageUrl: uploadResult.secure_url })
+            .exec()
+
         return this.findOne(id)
     }
 

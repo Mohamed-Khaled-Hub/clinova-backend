@@ -9,8 +9,14 @@ import {
     Delete,
     Req,
     UseGuards,
+    UseInterceptors,
+    UploadedFile,
     NotFoundException,
+    FileTypeValidator,
+    ParseFilePipe,
+    MaxFileSizeValidator,
 } from '@nestjs/common'
+import { FileInterceptor } from '@nestjs/platform-express'
 // Decorators
 import { RequirePermission } from '@/modules/permission/decorators/permission.decorator'
 // DTOs
@@ -59,6 +65,24 @@ export class UserController {
         if (!updatedUser)
             throw new NotFoundException('Your user profile was not found')
         return updatedUser
+    }
+
+    // PATCH /users/me/avatar
+    @Patch('me/avatar')
+    @UseInterceptors(FileInterceptor('file'))
+    async updateMyAvatar(
+        @Req() req: AuthenticatedRequest,
+        @UploadedFile(
+            new ParseFilePipe({
+                validators: [
+                    new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 3 }),
+                    new FileTypeValidator({ fileType: '.(png|jpeg|jpg|webp)' }),
+                ],
+            })
+        )
+        file: Express.Multer.File
+    ) {
+        return this.userService.updateAvatar(req.user.sub, file)
     }
 
     // POST /users

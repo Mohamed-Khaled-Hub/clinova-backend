@@ -5,8 +5,14 @@ import {
     Patch,
     Body,
     UseGuards,
+    UseInterceptors,
+    UploadedFile,
+    ParseFilePipe,
     NotFoundException,
+    FileTypeValidator,
+    MaxFileSizeValidator,
 } from '@nestjs/common'
+import { FileInterceptor } from '@nestjs/platform-express'
 // Decorators
 import { RequirePermission } from '@/modules/permission/decorators/permission.decorator'
 // DTOs
@@ -43,6 +49,29 @@ export class SettingsController {
     ): Promise<SettingsDocument> {
         const updatedSettings =
             await this.settingsService.updateSettings(updateSettingsDto)
+        if (!updatedSettings) throw new NotFoundException('Settings not found')
+        return updatedSettings
+    }
+
+    // PATCH /settings/logo
+    @Patch('logo')
+    @RequirePermission(PermissionsEnum.SETTINGS, 'canWrite')
+    @UseInterceptors(FileInterceptor('file'))
+    async updateLogo(
+        @UploadedFile(
+            new ParseFilePipe({
+                validators: [
+                    new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 3 }),
+                    new FileTypeValidator({
+                        fileType: '.(png|jpeg|jpg|webp|svg)',
+                    }),
+                ],
+                fileIsRequired: true,
+            })
+        )
+        file: Express.Multer.File
+    ): Promise<SettingsDocument> {
+        const updatedSettings = await this.settingsService.updateLogo(file)
         if (!updatedSettings) throw new NotFoundException('Settings not found')
         return updatedSettings
     }

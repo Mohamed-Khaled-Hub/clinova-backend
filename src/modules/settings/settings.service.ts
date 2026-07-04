@@ -9,6 +9,8 @@ import {
     Settings,
     SettingsDocument,
 } from '@/modules/settings/schemas/settings.schema'
+// Services
+import { CloudinaryService } from '@/modules/cloudinary/cloudinary.service'
 // Variables
 import { SETTINGS_ID } from '@/modules/settings/schemas/settings.schema'
 
@@ -18,7 +20,8 @@ export class SettingsService {
 
     constructor(
         @InjectModel(Settings.name)
-        private readonly settingsModel: Model<SettingsDocument>
+        private readonly settingsModel: Model<SettingsDocument>,
+        private readonly cloudinaryService: CloudinaryService
     ) {}
 
     // GET /settings
@@ -42,6 +45,43 @@ export class SettingsService {
                 returnDocument: 'after',
                 upsert: true,
             })
+            .exec()
+    }
+
+    // PATCH /settings/logo
+    async updateLogo(
+        file: Express.Multer.File
+    ): Promise<SettingsDocument | null> {
+        const currentSettings = await this.getSettings()
+
+        if (currentSettings?.logoUrl) {
+            try {
+                const urlParts = currentSettings.logoUrl.split('/')
+                const fileNameWithExtension = urlParts[urlParts.length - 1]
+                const [publicId] = fileNameWithExtension.split('.')
+
+                await this.cloudinaryService.deleteImage(
+                    `clinic_logos/${publicId}`
+                )
+            } catch (error) {
+                console.error(
+                    'Failed to delete old logo from Cloudinary:',
+                    error
+                )
+            }
+        }
+
+        const uploadResult = await this.cloudinaryService.uploadImage(
+            file,
+            'clinic_logos'
+        )
+
+        return this.settingsModel
+            .findByIdAndUpdate(
+                this.SETTINGS_ID,
+                { logoUrl: uploadResult.secure_url },
+                { returnDocument: 'after', upsert: true }
+            )
             .exec()
     }
 }

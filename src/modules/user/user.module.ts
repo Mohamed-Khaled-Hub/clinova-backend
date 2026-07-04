@@ -3,6 +3,8 @@ import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Controllers
 import { UserController } from '@/modules/user/user.controller'
+// Modules
+import { CloudinaryModule } from '@/modules/cloudinary/cloudinary.module'
 // Schemas
 import { User, UserSchema } from '@/modules/user/schemas/user.schema'
 // Services
@@ -12,6 +14,7 @@ import { UserSeederService } from '@/modules/user/user-seeder.service'
 @Module({
     imports: [
         MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+        CloudinaryModule,
     ],
     controllers: [UserController],
     providers: [UserService, UserSeederService],

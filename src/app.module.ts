@@ -20,6 +20,7 @@ import { SettingsModule } from '@/modules/settings/settings.module'
 import { UserModule } from '@/modules/user/user.module'
 import { VisitModule } from '@/modules/visit/visit.module'
 import { FinanceModule } from './modules/finance/finance.module'
+import { CloudinaryModule } from './modules/cloudinary/cloudinary.module'
 
 const databaseUrl = process.env.DATABASE_URL as string
 
@@ -38,6 +39,7 @@ const databaseUrl = process.env.DATABASE_URL as string
         ExpenseModule,
         PatientModule,
         FinanceModule,
+        CloudinaryModule,
     ],
     providers: [
         {
