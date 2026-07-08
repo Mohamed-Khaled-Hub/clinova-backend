@@ -10,4 +10,5 @@ export enum EndpointsEnum {
     VISIT = 'visits',
     SETTINGS = 'settings',
     FINANCE = 'finance',
+    MEDICAL_DOCUMENTS = 'medical-documents',
 }

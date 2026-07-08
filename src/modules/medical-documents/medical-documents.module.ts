@@ -28,5 +28,6 @@ import { MedicalDocumentsController } from './medical-documents.controller'
     ],
     providers: [MedicalDocumentsService],
     controllers: [MedicalDocumentsController],
+    exports: [MedicalDocumentsService],
 })
 export class MedicalDocumentsModule {}

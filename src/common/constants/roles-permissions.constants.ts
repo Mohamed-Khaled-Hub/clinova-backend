@@ -57,6 +57,7 @@ export const ROLES_PERMISSIONS_MATRIX: Record<RolesEnum, MatrixRoleType> = {
             fullAccess(PermissionsEnum.VISIT),
             fullAccess(PermissionsEnum.SETTINGS),
             readOnlyAccess(PermissionsEnum.FINANCE),
+            readOnlyAccess(PermissionsEnum.MEDICAL_DOCUMENTS),
         ],
     },
     [RolesEnum.RECEPTIONIST]: {
@@ -72,6 +73,7 @@ export const ROLES_PERMISSIONS_MATRIX: Record<RolesEnum, MatrixRoleType> = {
             readOnlyAccess(PermissionsEnum.VISIT),
             readOnlyAccess(PermissionsEnum.SETTINGS),
             readOnlyAccess(PermissionsEnum.FINANCE),
+            readOnlyAccess(PermissionsEnum.MEDICAL_DOCUMENTS),
         ],
     },
 }
