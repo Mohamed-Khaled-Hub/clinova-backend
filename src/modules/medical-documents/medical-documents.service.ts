@@ -3,7 +3,9 @@ import { Model } from 'mongoose'
 import { InjectModel } from '@nestjs/mongoose'
 import { Injectable, NotFoundException } from '@nestjs/common'
 // Enums
-import { LangEnum } from '@/common/enums/schemas.enum'
+import { LangEnum, NoteCategoryEnum } from '@/common/enums/schemas.enum'
+// Interfaces
+import { MedicalDocumentsData } from '@/modules/medical-documents/interfaces/medical-documents.interface'
 // Schemas
 import { Visit, VisitDocument } from '@/modules/visit/schemas/visit.schema'
 import {
@@ -16,8 +18,12 @@ import {
     Patient,
     PatientDocument,
 } from '@/modules/patient/schemas/patient.schema'
-// Interfaces
-import { IAggregatedDocContext } from '@/modules/medical-documents/interfaces/medical-documents.interface'
+// Types
+import {
+    LabRequestData,
+    PrescriptionData,
+    RadiologyRequestData,
+} from '@/modules/medical-documents/types/medical-document.type'
 
 @Injectable()
 export class MedicalDocumentsService {
@@ -77,9 +83,10 @@ export class MedicalDocumentsService {
         )
     }
 
-    private async getAggregatedContext(
-        visitId: string
-    ): Promise<IAggregatedDocContext> {
+    private async getAggregatedContext<T extends NoteCategoryEnum>(
+        visitId: string,
+        targetCategories?: NoteCategoryEnum[]
+    ): Promise<MedicalDocumentsData<T>> {
         const settings = await this.settingsModel
             .findById(this.SETTINGS_ID)
             .lean()
@@ -107,6 +114,13 @@ export class MedicalDocumentsService {
             throw new NotFoundException(
                 'Associated healthcare provider not found'
             )
+
+        let rawNotes = visit.notes ?? []
+        if (targetCategories && targetCategories.length > 0) {
+            rawNotes = rawNotes.filter((note) =>
+                targetCategories.includes(note.category)
+            )
+        }
 
         return {
             language: settings.primaryLanguage.toLowerCase(),
@@ -136,10 +150,18 @@ export class MedicalDocumentsService {
                 height: visit.height ?? null,
                 weight: visit.weight ?? null,
                 bloodPressure: visit.bloodPressure ?? null,
-                visitDate: this.formatDate(visit.visitDate, isArabic),
-                nextVisitDate: this.formatDate(visit.nextVisitDate, isArabic),
-                notes: (visit.notes ?? []).map((note) => ({
-                    category: note.category,
+                visitDate: this.formatDate(
+                    visit.visitDate,
+                    isArabic,
+                    'dateOnly'
+                ),
+                nextVisitDate: this.formatDate(
+                    visit.nextVisitDate,
+                    isArabic,
+                    'dateOnly'
+                ),
+                notes: rawNotes.map((note) => ({
+                    category: note.category as T,
                     noteText: note.noteText,
                     contentDate: this.formatDate(
                         note.contentDate,
@@ -152,15 +174,26 @@ export class MedicalDocumentsService {
         }
     }
 
-    async getPrescription(visitId: string): Promise<IAggregatedDocContext> {
-        return await this.getAggregatedContext(visitId)
+    async getPrescription(visitId: string): Promise<PrescriptionData> {
+        return await this.getAggregatedContext(visitId, [
+            NoteCategoryEnum.PRESCRIBED_MEDICATIONS,
+            NoteCategoryEnum.DIAGNOSIS,
+        ])
     }
 
-    async getLabRequest(visitId: string): Promise<IAggregatedDocContext> {
-        return await this.getAggregatedContext(visitId)
+    async getLabRequest(visitId: string): Promise<LabRequestData> {
+        return await this.getAggregatedContext(visitId, [
+            NoteCategoryEnum.REQUESTED_LAB_TESTS,
+            NoteCategoryEnum.DIAGNOSIS,
+        ])
     }
 
-    async getRadiologyRequest(visitId: string): Promise<IAggregatedDocContext> {
-        return await this.getAggregatedContext(visitId)
+    async getRadiologyRequest(visitId: string): Promise<RadiologyRequestData> {
+        return await this.getAggregatedContext(visitId, [
+            NoteCategoryEnum.REQUESTED_RADIOLOGY,
+            NoteCategoryEnum.COMPLAINT,
+            NoteCategoryEnum.HISTORY,
+            NoteCategoryEnum.DIAGNOSIS,
+        ])
     }
 }

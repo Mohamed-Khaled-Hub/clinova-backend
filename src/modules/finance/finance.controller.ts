@@ -44,7 +44,7 @@ export class FinanceController {
         return this.financeService.getSummary(startDate, endDate)
     }
 
-    // GET /finance/timeline?interval=monthly&year=2026
+    // GET /finance/timeline?interval=[monthly|weekly|daily]&year=YYYY
     @Get('timeline')
     @RequirePermission(PermissionsEnum.FINANCE, 'canRead')
     async getTimeline(

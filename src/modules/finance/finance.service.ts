@@ -35,7 +35,7 @@ export class FinanceService {
         private readonly expenseModel: Model<ExpenseDocument>
     ) {}
 
-    // GET /finance/summary
+    // GET /finance/summary?startDate=YYYY-MM-DD&endDate=YYYY-MM-DD
     async getSummary(
         startDate: string,
         endDate: string
@@ -100,7 +100,7 @@ export class FinanceService {
         }
     }
 
-    // GET /finance/timeline
+    // GET /finance/timeline?interval=[monthly|weekly|daily]&year=YYYY
     async getTimeline(
         interval: IntervalEnum,
         year: number
@@ -231,7 +231,7 @@ export class FinanceService {
         return result
     }
 
-    // GET /finance/revenue-by-category
+    // GET /finance/revenue-by-category?startDate=YYYY-MM-DD&endDate=YYYY-MM-DD
     async getRevenueByCategory(
         startDate: string,
         endDate: string
@@ -299,7 +299,7 @@ export class FinanceService {
         })
     }
 
-    // GET /finance/expenses-by-category
+    // GET /finance/expenses-by-category?startDate=YYYY-MM-DD&endDate=YYYY-MM-DD
     async getExpensesByCategory(
         startDate: string,
         endDate: string
