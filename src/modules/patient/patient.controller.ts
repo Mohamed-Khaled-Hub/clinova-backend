@@ -49,6 +49,13 @@ export class PatientController {
         return this.patientService.findAll()
     }
 
+    // GET /patients/by-date?date=YYYY-MM-DD
+    @Get('by-date')
+    @RequirePermission(PermissionsEnum.PATIENT, 'canRead')
+    async findByDate(@Query('date') date: string): Promise<PatientDocument[]> {
+        return this.patientService.findByDate(date)
+    }
+
     // GET /patients/search?term=...
     @Get('search')
     @RequirePermission(PermissionsEnum.PATIENT, 'canRead')

@@ -49,6 +49,24 @@ export class PatientService {
         return this.patientModel.findById(id).exec()
     }
 
+    // GET /patients/by-date?date=YYYY-MM-DD
+    async findByDate(dateString: string): Promise<PatientDocument[]> {
+        const startOfDay = new Date(dateString)
+        startOfDay.setHours(0, 0, 0, 0)
+
+        const endOfDay = new Date(dateString)
+        endOfDay.setHours(23, 59, 59, 999)
+
+        return this.patientModel
+            .find({
+                createdAt: {
+                    $gte: startOfDay,
+                    $lte: endOfDay,
+                },
+            })
+            .exec()
+    }
+
     // PATCH /patients/:id
     async update(
         id: string,

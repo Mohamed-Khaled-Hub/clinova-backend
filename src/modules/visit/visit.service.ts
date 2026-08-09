@@ -202,6 +202,30 @@ export class VisitService {
             .filter((visit): visit is PopulatedVisitDocument => visit !== null)
     }
 
+    // GET /visits/by-date?date=YYYY-MM-DD
+    async findByDate(dateString: string): Promise<PopulatedVisitDocument[]> {
+        const startOfDay = new Date(dateString)
+        startOfDay.setHours(0, 0, 0, 0)
+
+        const endOfDay = new Date(dateString)
+        endOfDay.setHours(23, 59, 59, 999)
+
+        const visits = await this.visitModel
+            .find({
+                visitDate: {
+                    $gte: startOfDay,
+                    $lte: endOfDay,
+                },
+            })
+            .populate(this.getStandardPopulate())
+            .sort({ visitDate: -1 })
+            .exec()
+
+        return visits
+            .map((visit) => this.mapToPopulatedVisit(visit))
+            .filter((visit): visit is PopulatedVisitDocument => visit !== null)
+    }
+
     // PATCH /visits/:id
     async update(
         id: string,

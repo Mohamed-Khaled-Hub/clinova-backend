@@ -1,6 +1,6 @@
 // Core
 import {
-    Controller,
+    Req,
     Get,
     Post,
     Delete,
@@ -9,8 +9,9 @@ import {
     Patch,
     Query,
     UseGuards,
+    Controller,
     NotFoundException,
-    Req,
+    BadRequestException,
 } from '@nestjs/common'
 // Decorators
 import { RequirePermission } from '@/modules/permission/decorators/permission.decorator'
@@ -51,6 +52,18 @@ export class VisitController {
     @RequirePermission(PermissionsEnum.VISIT, 'canRead')
     async findAll(): Promise<PopulatedVisitDocument[]> {
         return this.visitService.findAll()
+    }
+
+    // GET /visits/by-date?date=YYYY-MM-DD
+    @Get('by-date')
+    @RequirePermission(PermissionsEnum.VISIT, 'canRead')
+    async findByDate(
+        @Query('date') date: string
+    ): Promise<PopulatedVisitDocument[]> {
+        if (!date) {
+            throw new BadRequestException('Query parameter "date" is required.')
+        }
+        return this.visitService.findByDate(date)
     }
 
     // GET /visits/notes/suggestions?search=...&noteType=NoteCategoryEnum
