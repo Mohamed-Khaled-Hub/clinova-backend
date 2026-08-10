@@ -51,8 +51,8 @@ export class UserSeederService implements OnModuleInit {
             },
             {
                 username: 'doctor',
-                fullNameEn: 'Dr. Mohamed Khaled',
-                fullNameAr: 'د. محمد خالد',
+                fullNameEn: 'Clinic Doctor',
+                fullNameAr: 'طبيب العيادة',
                 roleKey: RolesEnum.DOCTOR,
                 specializationEn: 'General Practitioner',
                 specializationAr: 'ممارس عام',
