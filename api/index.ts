@@ -1,14 +1,24 @@
+// Register path alias
+import * as tsconfigPaths from 'tsconfig-paths'
+import * as path from 'node:path'
+
+// Load tsconfig.json explicitly so runtime resolves `@/*`
+tsconfigPaths.register({
+    baseUrl: path.resolve(__dirname, '..'),
+    paths: {
+        '@/*': ['src/*'],
+    },
+})
+
 // Core
 import { Logger } from '@nestjs/common'
-// CHANGE THIS: import { AppModule } from '@/app.module'
-import { AppModule } from '../src/app.module'
+import { AppModule } from '@/app.module'
 import { NestFactory } from '@nestjs/core'
 import { ExpressAdapter } from '@nestjs/platform-express'
 import serverlessExpress from '@codegenie/serverless-express'
 import express, { Request, Response } from 'express'
 // Variables
-// CHANGE THIS: import { apiName } from '@/main'
-import { apiName } from '../src/main'
+import { apiName } from '@/main'
 
 // Express Server
 const server = express()
