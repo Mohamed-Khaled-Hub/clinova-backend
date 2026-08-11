@@ -1,12 +1,12 @@
 // Core
 import { Logger } from '@nestjs/common'
-import { AppModule } from 'src/app.module'
+import { AppModule } from '../src/app.module'
 import { NestFactory } from '@nestjs/core'
 import { ExpressAdapter } from '@nestjs/platform-express'
 import serverlessExpress from '@codegenie/serverless-express'
 import express, { Request, Response } from 'express'
 // Variables
-import { apiName } from 'src/main'
+import { apiName } from '../src/main'
 
 // Express Server
 const server = express()
