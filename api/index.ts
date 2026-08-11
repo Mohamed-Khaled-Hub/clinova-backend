@@ -14,9 +14,12 @@ const server = express()
 // Logger
 const logger = new Logger(`${apiName} API`)
 
-let cachedServer: ReturnType<typeof serverlessExpress>
+// Infer the return type directly from serverlessExpress
+type ServerlessApp = ReturnType<typeof serverlessExpress>
 
-async function bootstrap() {
+let cachedServer: ServerlessApp
+
+async function bootstrap(): Promise<ServerlessApp> {
     if (!cachedServer) {
         const app = await NestFactory.create(
             AppModule,
@@ -26,6 +29,7 @@ async function bootstrap() {
         app.enableCors()
         await app.init()
 
+        // No type assertion needed here
         cachedServer = serverlessExpress({ app: server })
         logger.log('Application serverless instance initialized')
     }

@@ -23,7 +23,7 @@
         "noFallthroughCasesInSwitch": false,
         "paths": {
             "@/*": ["src/*"]
-        },
-        "include": ["src/**/*", "api/**/*"]
-    }
+        }
+    },
+    "include": ["src/**/*", "api/**/*"]
 }
