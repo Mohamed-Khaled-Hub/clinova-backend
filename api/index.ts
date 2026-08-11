@@ -1,12 +1,14 @@
 // Core
 import { Logger } from '@nestjs/common'
-import { AppModule } from '@/app.module'
+// CHANGE THIS: import { AppModule } from '@/app.module'
+import { AppModule } from '../src/app.module'
 import { NestFactory } from '@nestjs/core'
 import { ExpressAdapter } from '@nestjs/platform-express'
 import serverlessExpress from '@codegenie/serverless-express'
 import express, { Request, Response } from 'express'
 // Variables
-import { apiName } from '@/main'
+// CHANGE THIS: import { apiName } from '@/main'
+import { apiName } from '../src/main'
 
 // Express Server
 const server = express()
@@ -14,7 +16,6 @@ const server = express()
 // Logger
 const logger = new Logger(`${apiName} API`)
 
-// Infer the return type directly from serverlessExpress
 type ServerlessApp = ReturnType<typeof serverlessExpress>
 
 let cachedServer: ServerlessApp
@@ -29,7 +30,6 @@ async function bootstrap(): Promise<ServerlessApp> {
         app.enableCors()
         await app.init()
 
-        // No type assertion needed here
         cachedServer = serverlessExpress({ app: server })
         logger.log('Application serverless instance initialized')
     }
