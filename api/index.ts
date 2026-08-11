@@ -4,7 +4,7 @@ import { AppModule } from '@/app.module'
 import { NestFactory } from '@nestjs/core'
 import { ExpressAdapter } from '@nestjs/platform-express'
 import serverlessExpress from '@codegenie/serverless-express'
-import express from 'express'
+import express, { Request, Response } from 'express'
 // Variables
 import { apiName } from '@/main'
 
@@ -14,18 +14,25 @@ const server = express()
 // Logger
 const logger = new Logger(`${apiName} API`)
 
-async function bootstrap() {
-    const app = await NestFactory.create(AppModule, new ExpressAdapter(server))
+let cachedServer: ReturnType<typeof serverlessExpress>
 
-    app.enableCors()
-    await app.init()
+async function bootstrap() {
+    if (!cachedServer) {
+        const app = await NestFactory.create(
+            AppModule,
+            new ExpressAdapter(server)
+        )
+
+        app.enableCors()
+        await app.init()
+
+        cachedServer = serverlessExpress({ app: server })
+        logger.log('Application serverless instance initialized')
+    }
+    return cachedServer
 }
 
-// Bootstrap
-bootstrap()
-    .then(() => {
-        logger.log(`Application is running on port ${process.env.PORT ?? 3000}`)
-    })
-    .catch((err: unknown) => console.error(err))
-
-export default serverlessExpress({ app: server })
+export default async function handler(req: Request, res: Response) {
+    const serverlessApp = await bootstrap()
+    return serverlessApp(req, res)
+}
