@@ -2,7 +2,7 @@
 import { Injectable, NestMiddleware, Logger } from '@nestjs/common'
 import { Response, NextFunction } from 'express'
 // Interfaces
-import { AuthenticatedRequest } from '@/modules/auth/interfaces/auth.interface'
+import { AuthenticatedRequest } from 'src/modules/auth/interfaces/auth.interface'
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {

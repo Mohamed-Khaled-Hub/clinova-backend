@@ -1,5 +1,5 @@
 // Enums
-import { NoteCategoryEnum } from '@/common/enums/schemas.enum'
+import { NoteCategoryEnum } from 'src/common/enums/schemas.enum'
 
 export interface MedicalDocumentsData<
     T extends NoteCategoryEnum = NoteCategoryEnum,

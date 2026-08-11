@@ -2,9 +2,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument, Schema as MongooseSchema } from 'mongoose'
 // Enums
-import { VisitCategoryEnum } from '@/common/enums/schemas.enum'
+import { VisitCategoryEnum } from 'src/common/enums/schemas.enum'
 // Types
-import { CustomFieldsType } from '@/common/types/schemas.type'
+import { CustomFieldsType } from 'src/common/types/schemas.type'
 
 // Document
 export type PriceCatalogDocument = HydratedDocument<PriceCatalog>

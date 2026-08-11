@@ -6,11 +6,11 @@ import {
     PaymentMethodEnum,
     ExpenseCategoryEnum,
     FinancialStatusEnum,
-} from '@/common/enums/schemas.enum'
+} from 'src/common/enums/schemas.enum'
 // Schemas
-import { UserDocument } from '@/modules/user/schemas/user.schema'
+import { UserDocument } from 'src/modules/user/schemas/user.schema'
 // Types
-import { CustomFieldsType } from '@/common/types/schemas.type'
+import { CustomFieldsType } from 'src/common/types/schemas.type'
 
 // Document
 export type ExpenseDocument = HydratedDocument<Expense>

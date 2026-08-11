@@ -2,16 +2,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Types, Schema as MongooseSchema, HydratedDocument } from 'mongoose'
 // Schemas
-import { UserDocument } from '@/modules/user/schemas/user.schema'
-import { VisitDocument } from '@/modules/visit/schemas/visit.schema'
-import { PatientDocument } from '@/modules/patient/schemas/patient.schema'
+import { UserDocument } from 'src/modules/user/schemas/user.schema'
+import { VisitDocument } from 'src/modules/visit/schemas/visit.schema'
+import { PatientDocument } from 'src/modules/patient/schemas/patient.schema'
 // Enums
 import {
     PaymentMethodEnum,
     FinancialStatusEnum,
-} from '@/common/enums/schemas.enum'
+} from 'src/common/enums/schemas.enum'
 // Types
-import { CustomFieldsType } from '@/common/types/schemas.type'
+import { CustomFieldsType } from 'src/common/types/schemas.type'
 
 // Document
 export type RevenueDocument = HydratedDocument<Revenue>

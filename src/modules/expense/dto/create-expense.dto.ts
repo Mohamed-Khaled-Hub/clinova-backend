@@ -15,9 +15,9 @@ import {
     ExpenseCategoryEnum,
     PaymentMethodEnum,
     FinancialStatusEnum,
-} from '@/common/enums/schemas.enum'
+} from 'src/common/enums/schemas.enum'
 // Types
-import { CustomFieldsType } from '@/common/types/schemas.type'
+import { CustomFieldsType } from 'src/common/types/schemas.type'
 
 export class CreateExpenseDto {
     @IsNotEmpty()

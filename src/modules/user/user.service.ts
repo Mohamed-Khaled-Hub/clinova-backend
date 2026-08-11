@@ -8,21 +8,21 @@ import {
 import { InjectModel } from '@nestjs/mongoose'
 import { Model, Types, PipelineStage, QueryFilter } from 'mongoose'
 // DTOs
-import { CreateUserDto } from '@/modules/user/dto/create-user.dto'
-import { UpdateUserDto } from '@/modules/user/dto/update-user.dto'
-import { UpdateUserRoleDto } from '@/modules/user/dto/update-user-role.dto'
+import { CreateUserDto } from 'src/modules/user/dto/create-user.dto'
+import { UpdateUserDto } from 'src/modules/user/dto/update-user.dto'
+import { UpdateUserRoleDto } from 'src/modules/user/dto/update-user-role.dto'
 // Enums
-import { RolesEnum } from '@/common/enums/roles-permissions.enum'
+import { RolesEnum } from 'src/common/enums/roles-permissions.enum'
 // Schemas
-import { PopulatedRoleDocument } from '@/modules/role/schemas/role.schema'
+import { PopulatedRoleDocument } from 'src/modules/role/schemas/role.schema'
 import {
     User,
     UserDocument,
     PopulatedUserDocument,
-} from '@/modules/user/schemas/user.schema'
+} from 'src/modules/user/schemas/user.schema'
 // Services
-import { RoleService } from '@/modules/role/role.service'
-import { CloudinaryService } from '@/modules/cloudinary/cloudinary.service'
+import { RoleService } from 'src/modules/role/role.service'
+import { CloudinaryService } from 'src/modules/cloudinary/cloudinary.service'
 
 @Injectable()
 export class UserService {

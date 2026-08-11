@@ -13,13 +13,13 @@ import {
     Revenue,
     RevenueDocument,
     PopulatedRevenueDocument,
-} from '@/modules/revenue/schemas/revenue.schema'
+} from 'src/modules/revenue/schemas/revenue.schema'
 // Services
-import { VisitService } from '@/modules/visit/visit.service'
-import { PriceCatalogService } from '@/modules/price-catalog/price-catalog.service'
+import { VisitService } from 'src/modules/visit/visit.service'
+import { PriceCatalogService } from 'src/modules/price-catalog/price-catalog.service'
 // DTOs
-import { CreateRevenueDto } from '@/modules/revenue/dto/create-revenue.dto'
-import { UpdateRevenueDto } from '@/modules/revenue/dto/update-revenue.dto'
+import { CreateRevenueDto } from 'src/modules/revenue/dto/create-revenue.dto'
+import { UpdateRevenueDto } from 'src/modules/revenue/dto/update-revenue.dto'
 
 @Injectable()
 export class RevenueService {

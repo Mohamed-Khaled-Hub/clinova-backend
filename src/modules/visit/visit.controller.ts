@@ -14,23 +14,23 @@ import {
     BadRequestException,
 } from '@nestjs/common'
 // Decorators
-import { RequirePermission } from '@/modules/permission/decorators/permission.decorator'
+import { RequirePermission } from 'src/modules/permission/decorators/permission.decorator'
 // DTOs
-import { CreateVisitDto } from '@/modules/visit/dto/create-visit.dto'
-import { UpdateVisitDto } from '@/modules/visit/dto/update-visit.dto'
+import { CreateVisitDto } from 'src/modules/visit/dto/create-visit.dto'
+import { UpdateVisitDto } from 'src/modules/visit/dto/update-visit.dto'
 // Enums
-import { PermissionsEnum } from '@/common/enums/roles-permissions.enum'
-import { EndpointsEnum } from '@/common/enums/endpoints.enum'
-import { NoteCategoryEnum } from '@/common/enums/schemas.enum'
+import { PermissionsEnum } from 'src/common/enums/roles-permissions.enum'
+import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
+import { NoteCategoryEnum } from 'src/common/enums/schemas.enum'
 // Guards
-import { RoleGuard } from '@/modules/role/guards/role.guard'
+import { RoleGuard } from 'src/modules/role/guards/role.guard'
 // Interfaces
-import type { AuthenticatedRequest } from '@/modules/auth/interfaces/auth.interface'
-import { MessageResponse } from '@/common/interfaces/response.interface'
+import type { AuthenticatedRequest } from 'src/modules/auth/interfaces/auth.interface'
+import { MessageResponse } from 'src/common/interfaces/response.interface'
 // Schemas
-import { PopulatedVisitDocument } from '@/modules/visit/schemas/visit.schema'
+import { PopulatedVisitDocument } from 'src/modules/visit/schemas/visit.schema'
 // Services
-import { VisitService } from '@/modules/visit/visit.service'
+import { VisitService } from 'src/modules/visit/visit.service'
 
 @Controller(EndpointsEnum.VISIT)
 @UseGuards(RoleGuard)

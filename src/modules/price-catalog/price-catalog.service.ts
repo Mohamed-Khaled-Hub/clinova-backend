@@ -10,12 +10,12 @@ import { Model } from 'mongoose'
 import {
     PriceCatalog,
     PriceCatalogDocument,
-} from '@/modules/price-catalog/schemas/price-catalog.schema'
+} from 'src/modules/price-catalog/schemas/price-catalog.schema'
 // DTOs
-import { CreatePriceCatalogDto } from '@/modules/price-catalog/dto/create-price-catalog.dto'
-import { UpdatePriceCatalogDto } from '@/modules/price-catalog/dto/update-price-catalog.dto'
+import { CreatePriceCatalogDto } from 'src/modules/price-catalog/dto/create-price-catalog.dto'
+import { UpdatePriceCatalogDto } from 'src/modules/price-catalog/dto/update-price-catalog.dto'
 // Enums
-import { VisitCategoryEnum } from '@/common/enums/schemas.enum'
+import { VisitCategoryEnum } from 'src/common/enums/schemas.enum'
 
 @Injectable()
 export class PriceCatalogService {

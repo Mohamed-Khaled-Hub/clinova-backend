@@ -21,9 +21,9 @@
         "noImplicitAny": false,
         "strictBindCallApply": false,
         "noFallthroughCasesInSwitch": false,
-        "paths": {
-            "@/*": ["src/*"]
-        }
+//        "paths": {
+//            "@/*": ["src/*"]
+//        }
     },
     "include": ["src/**/*", "api/**/*"]
 }

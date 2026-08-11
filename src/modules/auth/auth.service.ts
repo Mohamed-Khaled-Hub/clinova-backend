@@ -8,16 +8,16 @@ import {
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 // DTOs
-import { LoginDto } from '@/modules/auth/dto/login.dto'
-import { RefreshTokenDto } from '@/modules/auth/dto/refresh.dto'
-import { ChangePasswordDto } from '@/modules/auth/dto/change-password.dto'
+import { LoginDto } from 'src/modules/auth/dto/login.dto'
+import { RefreshTokenDto } from 'src/modules/auth/dto/refresh.dto'
+import { ChangePasswordDto } from 'src/modules/auth/dto/change-password.dto'
 // Interfaces
-import { TokenResponse } from '@/modules/auth/interfaces/auth.interface'
-import { MessageResponse } from '@/common/interfaces/response.interface'
+import { TokenResponse } from 'src/modules/auth/interfaces/auth.interface'
+import { MessageResponse } from 'src/common/interfaces/response.interface'
 // Services
-import { UserService } from '@/modules/user/user.service'
+import { UserService } from 'src/modules/user/user.service'
 // Variables
-import { jwtConstants } from '@/common/constants/auth.constants'
+import { jwtConstants } from 'src/common/constants/auth.constants'
 
 @Injectable()
 export class AuthService {

@@ -2,10 +2,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument, Schema as MongooseSchema, Types } from 'mongoose'
 // Schemas
-import { RoleDocument } from '@/modules/role/schemas/role.schema'
-import { PermissionDocument } from '@/modules/permission/schemas/permission.schema'
+import { RoleDocument } from 'src/modules/role/schemas/role.schema'
+import { PermissionDocument } from 'src/modules/permission/schemas/permission.schema'
 // Types
-import { CustomFieldsType } from '@/common/types/schemas.type'
+import { CustomFieldsType } from 'src/common/types/schemas.type'
 
 // Document
 export type UserDocument = HydratedDocument<User>

@@ -3,13 +3,13 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 // DTOs
-import { CreatePermissionDto } from '@/modules/permission/dto/create-permission.dto'
-import { UpdatePermissionDto } from '@/modules/permission/dto/update-permission.dto'
+import { CreatePermissionDto } from 'src/modules/permission/dto/create-permission.dto'
+import { UpdatePermissionDto } from 'src/modules/permission/dto/update-permission.dto'
 // Schemas
 import {
     Permission,
     PermissionDocument,
-} from '@/modules/permission/schemas/permission.schema'
+} from 'src/modules/permission/schemas/permission.schema'
 
 @Injectable()
 export class PermissionService {

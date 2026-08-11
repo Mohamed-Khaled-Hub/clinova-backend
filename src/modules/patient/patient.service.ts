@@ -6,10 +6,10 @@ import { Model } from 'mongoose'
 import {
     Patient,
     PatientDocument,
-} from '@/modules/patient/schemas/patient.schema'
+} from 'src/modules/patient/schemas/patient.schema'
 // DTOs
-import { CreatePatientDto } from '@/modules/patient/dto/create-patient.dto'
-import { UpdatePatientDto } from '@/modules/patient/dto/update-patient.dto'
+import { CreatePatientDto } from 'src/modules/patient/dto/create-patient.dto'
+import { UpdatePatientDto } from 'src/modules/patient/dto/update-patient.dto'
 
 @Injectable()
 export class PatientService {

@@ -2,16 +2,16 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Controllers
-import { SettingsController } from '@/modules/settings/settings.controller'
+import { SettingsController } from 'src/modules/settings/settings.controller'
 // Modules
-import { CloudinaryModule } from '@/modules/cloudinary/cloudinary.module'
+import { CloudinaryModule } from 'src/modules/cloudinary/cloudinary.module'
 // Schemas
 import {
     Settings,
     SettingsSchema,
-} from '@/modules/settings/schemas/settings.schema'
+} from 'src/modules/settings/schemas/settings.schema'
 // Services
-import { SettingsService } from '@/modules/settings/settings.service'
+import { SettingsService } from 'src/modules/settings/settings.service'
 
 @Module({
     imports: [

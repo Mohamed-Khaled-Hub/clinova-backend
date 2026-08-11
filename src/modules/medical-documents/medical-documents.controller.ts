@@ -1,12 +1,12 @@
 // Core
 import { Controller, Get, Param, UseGuards } from '@nestjs/common'
 // Decorators
-import { RequirePermission } from '@/modules/permission/decorators/permission.decorator'
+import { RequirePermission } from 'src/modules/permission/decorators/permission.decorator'
 // Enums
-import { PermissionsEnum } from '@/common/enums/roles-permissions.enum'
-import { EndpointsEnum } from '@/common/enums/endpoints.enum'
+import { PermissionsEnum } from 'src/common/enums/roles-permissions.enum'
+import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
 // Guards
-import { RoleGuard } from '@/modules/role/guards/role.guard'
+import { RoleGuard } from 'src/modules/role/guards/role.guard'
 // Services
 import { MedicalDocumentsService } from './medical-documents.service'
 // Types
@@ -14,7 +14,7 @@ import {
     PrescriptionData,
     LabRequestData,
     RadiologyRequestData,
-} from '@/modules/medical-documents/types/medical-document.type'
+} from 'src/modules/medical-documents/types/medical-document.type'
 
 @Controller(EndpointsEnum.MEDICAL_DOCUMENTS || 'medical-documents')
 @UseGuards(RoleGuard)

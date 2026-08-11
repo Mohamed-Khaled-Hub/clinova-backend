@@ -6,9 +6,9 @@ import {
     GenderEnum,
     MaritalStatusEnum,
     ReferralEnum,
-} from '@/common/enums/schemas.enum'
+} from 'src/common/enums/schemas.enum'
 // Types
-import { CustomFieldsType } from '@/common/types/schemas.type'
+import { CustomFieldsType } from 'src/common/types/schemas.type'
 
 // Document
 export type PatientDocument = HydratedDocument<Patient>

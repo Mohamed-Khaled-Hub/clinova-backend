@@ -7,24 +7,24 @@ import {
     ExpenseCategoryEnum,
     FinancialStatusEnum,
     VisitCategoryEnum,
-} from '@/common/enums/schemas.enum'
-import { IntervalEnum } from '@/modules/finance/enums/finance.enum'
+} from 'src/common/enums/schemas.enum'
+import { IntervalEnum } from 'src/modules/finance/enums/finance.enum'
 // Interfaces
 import {
     GetSummaryResponse,
     GetTimelineResponse,
     GetRevenueByCategoryResponse,
     GetExpensesByCategoryResponse,
-} from '@/modules/finance/interfaces/finance.responses.interface'
+} from 'src/modules/finance/interfaces/finance.responses.interface'
 // Schemas
 import {
     Revenue,
     RevenueDocument,
-} from '@/modules/revenue/schemas/revenue.schema'
+} from 'src/modules/revenue/schemas/revenue.schema'
 import {
     Expense,
     ExpenseDocument,
-} from '@/modules/expense/schemas/expense.schema'
+} from 'src/modules/expense/schemas/expense.schema'
 
 @Injectable()
 export class FinanceService {

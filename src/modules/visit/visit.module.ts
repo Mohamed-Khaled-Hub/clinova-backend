@@ -2,14 +2,14 @@
 import { Module, forwardRef } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Controllers
-import { VisitController } from '@/modules/visit/visit.controller'
+import { VisitController } from 'src/modules/visit/visit.controller'
 // Modules
-import { UserModule } from '@/modules/user/user.module'
-import { RevenueModule } from '@/modules/revenue/revenue.module'
+import { UserModule } from 'src/modules/user/user.module'
+import { RevenueModule } from 'src/modules/revenue/revenue.module'
 // Schemas
-import { Visit, VisitSchema } from '@/modules/visit/schemas/visit.schema'
+import { Visit, VisitSchema } from 'src/modules/visit/schemas/visit.schema'
 // Services
-import { VisitService } from '@/modules/visit/visit.service'
+import { VisitService } from 'src/modules/visit/visit.service'
 
 @Module({
     imports: [

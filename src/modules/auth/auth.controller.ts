@@ -1,21 +1,21 @@
 // Core
 import { Controller, Post, Body, Req } from '@nestjs/common'
 // Decorators
-import { Public } from '@/common/decorators/public.decorator'
+import { Public } from 'src/common/decorators/public.decorator'
 // DTOs
-import { LoginDto } from '@/modules/auth/dto/login.dto'
-import { RefreshTokenDto } from '@/modules/auth/dto/refresh.dto'
-import { ChangePasswordDto } from '@/modules/auth/dto/change-password.dto'
+import { LoginDto } from 'src/modules/auth/dto/login.dto'
+import { RefreshTokenDto } from 'src/modules/auth/dto/refresh.dto'
+import { ChangePasswordDto } from 'src/modules/auth/dto/change-password.dto'
 // Enums
-import { EndpointsEnum } from '@/common/enums/endpoints.enum'
+import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
 // Interfaces
 import type {
     TokenResponse,
     AuthenticatedRequest,
-} from '@/modules/auth/interfaces/auth.interface'
-import { MessageResponse } from '@/common/interfaces/response.interface'
+} from 'src/modules/auth/interfaces/auth.interface'
+import { MessageResponse } from 'src/common/interfaces/response.interface'
 // Services
-import { AuthService } from '@/modules/auth/auth.service'
+import { AuthService } from 'src/modules/auth/auth.service'
 
 @Controller(EndpointsEnum.AUTH)
 export class AuthController {

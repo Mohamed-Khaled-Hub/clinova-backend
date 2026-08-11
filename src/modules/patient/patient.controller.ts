@@ -12,21 +12,21 @@ import {
     NotFoundException,
 } from '@nestjs/common'
 // Decorators
-import { RequirePermission } from '@/modules/permission/decorators/permission.decorator'
+import { RequirePermission } from 'src/modules/permission/decorators/permission.decorator'
 // DTOs
-import { CreatePatientDto } from '@/modules/patient/dto/create-patient.dto'
-import { UpdatePatientDto } from '@/modules/patient/dto/update-patient.dto'
+import { CreatePatientDto } from 'src/modules/patient/dto/create-patient.dto'
+import { UpdatePatientDto } from 'src/modules/patient/dto/update-patient.dto'
 // Enums
-import { PermissionsEnum } from '@/common/enums/roles-permissions.enum'
-import { EndpointsEnum } from '@/common/enums/endpoints.enum'
+import { PermissionsEnum } from 'src/common/enums/roles-permissions.enum'
+import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
 // Guards
-import { RoleGuard } from '@/modules/role/guards/role.guard'
+import { RoleGuard } from 'src/modules/role/guards/role.guard'
 // Interfaces
-import { MessageResponse } from '@/common/interfaces/response.interface'
+import { MessageResponse } from 'src/common/interfaces/response.interface'
 // Schemas
-import { PatientDocument } from '@/modules/patient/schemas/patient.schema'
+import { PatientDocument } from 'src/modules/patient/schemas/patient.schema'
 // Services
-import { PatientService } from '@/modules/patient/patient.service'
+import { PatientService } from 'src/modules/patient/patient.service'
 
 @Controller(EndpointsEnum.PATIENT)
 @UseGuards(RoleGuard)

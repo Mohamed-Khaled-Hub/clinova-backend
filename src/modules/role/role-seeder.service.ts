@@ -5,14 +5,14 @@ import { Types } from 'mongoose'
 import {
     PermissionsEnum,
     RolesEnum,
-} from '@/common/enums/roles-permissions.enum'
+} from 'src/common/enums/roles-permissions.enum'
 // Schemas
-import { RolePermission } from '@/modules/role/schemas/role.schema'
+import { RolePermission } from 'src/modules/role/schemas/role.schema'
 // Services
-import { RoleService } from '@/modules/role/role.service'
-import { PermissionService } from '@/modules/permission/permission.service'
+import { RoleService } from 'src/modules/role/role.service'
+import { PermissionService } from 'src/modules/permission/permission.service'
 // Variables
-import { ROLES_PERMISSIONS_MATRIX } from '@/common/constants/roles-permissions.constants'
+import { ROLES_PERMISSIONS_MATRIX } from 'src/common/constants/roles-permissions.constants'
 
 @Injectable()
 export class RoleSeederService implements OnModuleInit {

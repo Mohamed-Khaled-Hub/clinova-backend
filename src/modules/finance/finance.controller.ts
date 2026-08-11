@@ -7,22 +7,22 @@ import {
     BadRequestException,
 } from '@nestjs/common'
 // Decorators
-import { RequirePermission } from '@/modules/permission/decorators/permission.decorator'
+import { RequirePermission } from 'src/modules/permission/decorators/permission.decorator'
 // Enums
-import { EndpointsEnum } from '@/common/enums/endpoints.enum'
-import { IntervalEnum } from '@/modules/finance/enums/finance.enum'
-import { PermissionsEnum } from '@/common/enums/roles-permissions.enum'
+import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
+import { IntervalEnum } from 'src/modules/finance/enums/finance.enum'
+import { PermissionsEnum } from 'src/common/enums/roles-permissions.enum'
 // Guards
-import { RoleGuard } from '@/modules/role/guards/role.guard'
+import { RoleGuard } from 'src/modules/role/guards/role.guard'
 // Interfaces
 import {
     GetExpensesByCategoryResponse,
     GetRevenueByCategoryResponse,
     GetSummaryResponse,
     GetTimelineResponse,
-} from '@/modules/finance/interfaces/finance.responses.interface'
+} from 'src/modules/finance/interfaces/finance.responses.interface'
 // Services
-import { FinanceService } from '@/modules/finance/finance.service'
+import { FinanceService } from 'src/modules/finance/finance.service'
 
 @Controller(EndpointsEnum.FINANCE)
 @UseGuards(RoleGuard)

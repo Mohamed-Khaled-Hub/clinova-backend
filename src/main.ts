@@ -4,9 +4,9 @@ import { NestFactory } from '@nestjs/core'
 import { ValidationPipe, Logger } from '@nestjs/common'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 // Filters
-import { GlobalExceptionFilter } from '@/common/filters/global-exception/global-exception.filter'
+import { GlobalExceptionFilter } from 'src/common/filters/global-exception/global-exception.filter'
 // Modules
-import { AppModule } from '@/app.module'
+import { AppModule } from 'src/app.module'
 
 // API Name
 export const apiName = 'Clinova'

@@ -3,27 +3,27 @@ import { Model } from 'mongoose'
 import { InjectModel } from '@nestjs/mongoose'
 import { Injectable, NotFoundException } from '@nestjs/common'
 // Enums
-import { LangEnum, NoteCategoryEnum } from '@/common/enums/schemas.enum'
+import { LangEnum, NoteCategoryEnum } from 'src/common/enums/schemas.enum'
 // Interfaces
-import { MedicalDocumentsData } from '@/modules/medical-documents/interfaces/medical-documents.interface'
+import { MedicalDocumentsData } from 'src/modules/medical-documents/interfaces/medical-documents.interface'
 // Schemas
-import { Visit, VisitDocument } from '@/modules/visit/schemas/visit.schema'
+import { Visit, VisitDocument } from 'src/modules/visit/schemas/visit.schema'
 import {
     Settings,
     SETTINGS_ID,
     SettingsDocument,
-} from '@/modules/settings/schemas/settings.schema'
-import { User, UserDocument } from '@/modules/user/schemas/user.schema'
+} from 'src/modules/settings/schemas/settings.schema'
+import { User, UserDocument } from 'src/modules/user/schemas/user.schema'
 import {
     Patient,
     PatientDocument,
-} from '@/modules/patient/schemas/patient.schema'
+} from 'src/modules/patient/schemas/patient.schema'
 // Types
 import {
     LabRequestData,
     PrescriptionData,
     RadiologyRequestData,
-} from '@/modules/medical-documents/types/medical-document.type'
+} from 'src/modules/medical-documents/types/medical-document.type'
 
 @Injectable()
 export class MedicalDocumentsService {

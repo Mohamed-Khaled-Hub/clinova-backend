@@ -3,16 +3,16 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 // DTOs
-import { UpdateSettingsDto } from '@/modules/settings/dto/update-settings.dto'
+import { UpdateSettingsDto } from 'src/modules/settings/dto/update-settings.dto'
 // Schemas
 import {
     Settings,
     SettingsDocument,
-} from '@/modules/settings/schemas/settings.schema'
+} from 'src/modules/settings/schemas/settings.schema'
 // Services
-import { CloudinaryService } from '@/modules/cloudinary/cloudinary.service'
+import { CloudinaryService } from 'src/modules/cloudinary/cloudinary.service'
 // Variables
-import { SETTINGS_ID } from '@/modules/settings/schemas/settings.schema'
+import { SETTINGS_ID } from 'src/modules/settings/schemas/settings.schema'
 
 @Injectable()
 export class SettingsService {

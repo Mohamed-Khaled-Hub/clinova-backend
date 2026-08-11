@@ -15,14 +15,14 @@ import {
 import { Type } from 'class-transformer'
 import { OmitType } from '@nestjs/mapped-types'
 // DTOs
-import { CreateRevenueDto } from '@/modules/revenue/dto/create-revenue.dto'
+import { CreateRevenueDto } from 'src/modules/revenue/dto/create-revenue.dto'
 // Enums
 import {
     VisitCategoryEnum,
     NoteCategoryEnum,
-} from '@/common/enums/schemas.enum'
+} from 'src/common/enums/schemas.enum'
 // Types
-import { CustomFieldsType } from '@/common/types/schemas.type'
+import { CustomFieldsType } from 'src/common/types/schemas.type'
 
 export class NestedRevenueDetailsDto extends OmitType(CreateRevenueDto, [
     'visitId',
