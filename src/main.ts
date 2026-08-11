@@ -9,7 +9,7 @@ import { GlobalExceptionFilter } from '@/common/filters/global-exception/global-
 import { AppModule } from '@/app.module'
 
 // API Name
-const apiName = 'Clinova'
+export const apiName = 'Clinova'
 
 // Logger
 const logger = new Logger(`${apiName} API`)
