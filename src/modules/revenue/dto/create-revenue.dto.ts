@@ -15,9 +15,9 @@ import { Type } from 'class-transformer'
 import {
     PaymentMethodEnum,
     FinancialStatusEnum,
-} from 'src/common/enums/schemas.enum'
+} from '../../../common/enums/schemas.enum'
 // Types
-import { CustomFieldsType } from 'src/common/types/schemas.type'
+import { CustomFieldsType } from '../../../common/types/schemas.type'
 
 export class CreateRevenueDto {
     @IsNotEmpty()

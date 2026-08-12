@@ -9,9 +9,9 @@ import {
     IsObject,
 } from 'class-validator'
 // Enums
-import { VisitCategoryEnum } from 'src/common/enums/schemas.enum'
+import { VisitCategoryEnum } from '../../../common/enums/schemas.enum'
 // Types
-import { CustomFieldsType } from 'src/common/types/schemas.type'
+import { CustomFieldsType } from '../../../common/types/schemas.type'
 
 export class CreatePriceCatalogDto {
     @IsNotEmpty()

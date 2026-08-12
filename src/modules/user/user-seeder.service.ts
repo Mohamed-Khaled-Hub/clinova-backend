@@ -1,12 +1,12 @@
 // Core
 import { Injectable, OnModuleInit, Logger } from '@nestjs/common'
 // DTOs
-import { CreateUserDto } from 'src/modules/user/dto/create-user.dto'
+import { CreateUserDto } from './dto/create-user.dto'
 // Enums
-import { RolesEnum } from 'src/common/enums/roles-permissions.enum'
+import { RolesEnum } from '../../common/enums/roles-permissions.enum'
 // Services
-import { UserService } from 'src/modules/user/user.service'
-import { RoleService } from 'src/modules/role/role.service'
+import { UserService } from './user.service'
+import { RoleService } from '../role/role.service'
 
 @Injectable()
 export class UserSeederService implements OnModuleInit {

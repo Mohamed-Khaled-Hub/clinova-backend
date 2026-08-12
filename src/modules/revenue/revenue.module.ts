@@ -2,17 +2,14 @@
 import { Module, forwardRef } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Controllers
-import { RevenueController } from 'src/modules/revenue/revenue.controller'
+import { RevenueController } from './revenue.controller'
 // Modules
-import { VisitModule } from 'src/modules/visit/visit.module'
-import { PriceCatalogModule } from 'src/modules/price-catalog/price-catalog.module'
+import { VisitModule } from '../visit/visit.module'
+import { PriceCatalogModule } from '../price-catalog/price-catalog.module'
 // Schemas
-import {
-    Revenue,
-    RevenueSchema,
-} from 'src/modules/revenue/schemas/revenue.schema'
+import { Revenue, RevenueSchema } from './schemas/revenue.schema'
 // Services
-import { RevenueService } from 'src/modules/revenue/revenue.service'
+import { RevenueService } from './revenue.service'
 
 @Module({
     imports: [

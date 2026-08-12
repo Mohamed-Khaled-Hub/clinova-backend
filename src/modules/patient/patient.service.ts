@@ -3,13 +3,10 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 // Schemas
-import {
-    Patient,
-    PatientDocument,
-} from 'src/modules/patient/schemas/patient.schema'
+import { Patient, PatientDocument } from './schemas/patient.schema'
 // DTOs
-import { CreatePatientDto } from 'src/modules/patient/dto/create-patient.dto'
-import { UpdatePatientDto } from 'src/modules/patient/dto/update-patient.dto'
+import { CreatePatientDto } from './dto/create-patient.dto'
+import { UpdatePatientDto } from './dto/update-patient.dto'
 
 @Injectable()
 export class PatientService {

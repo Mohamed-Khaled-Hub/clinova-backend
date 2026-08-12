@@ -7,20 +7,20 @@ import {
 import { InjectModel } from '@nestjs/mongoose'
 import { Model, PopulateOptions, Types } from 'mongoose'
 // DTOs
-import { CreateRoleDto } from 'src/modules/role/dto/create-role.dto'
-import { UpdateRoleDto } from 'src/modules/role/dto/update-role.dto'
-import { AddPermissionsDto } from 'src/modules/role/dto/add-permissions.dto'
-import { RemovePermissionsDto } from 'src/modules/role/dto/remove-permissions.dto'
+import { CreateRoleDto } from './dto/create-role.dto'
+import { UpdateRoleDto } from './dto/update-role.dto'
+import { AddPermissionsDto } from './dto/add-permissions.dto'
+import { RemovePermissionsDto } from './dto/remove-permissions.dto'
 // Schemas
 import {
     Role,
     RoleDocument,
     RolePermission,
     PopulatedRoleDocument,
-} from 'src/modules/role/schemas/role.schema'
-import { PermissionDocument } from 'src/modules/permission/schemas/permission.schema'
+} from './schemas/role.schema'
+import { PermissionDocument } from '../permission/schemas/permission.schema'
 // Services
-import { PermissionService } from 'src/modules/permission/permission.service'
+import { PermissionService } from '../permission/permission.service'
 
 @Injectable()
 export class RoleService {

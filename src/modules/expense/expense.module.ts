@@ -2,14 +2,11 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Controllers
-import { ExpenseController } from 'src/modules/expense/expense.controller'
+import { ExpenseController } from './expense.controller'
 // Schemas
-import {
-    Expense,
-    ExpenseSchema,
-} from 'src/modules/expense/schemas/expense.schema'
+import { Expense, ExpenseSchema } from './schemas/expense.schema'
 // Services
-import { ExpenseService } from 'src/modules/expense/expense.service'
+import { ExpenseService } from './expense.service'
 
 @Module({
     imports: [

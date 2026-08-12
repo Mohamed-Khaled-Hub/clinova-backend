@@ -2,14 +2,11 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Controllers
-import { PermissionController } from 'src/modules/permission/permission.controller'
+import { PermissionController } from './permission.controller'
 // Schemas
-import {
-    Permission,
-    PermissionSchema,
-} from 'src/modules/permission/schemas/permission.schema'
+import { Permission, PermissionSchema } from './schemas/permission.schema'
 // Services
-import { PermissionService } from 'src/modules/permission/permission.service'
+import { PermissionService } from './permission.service'
 
 @Module({
     imports: [

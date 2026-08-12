@@ -12,22 +12,22 @@ import {
     NotFoundException,
 } from '@nestjs/common'
 // Decorators
-import { RequirePermission } from 'src/modules/permission/decorators/permission.decorator'
+import { RequirePermission } from '../permission/decorators/permission.decorator'
 // DTOs
-import { CreateRevenueDto } from 'src/modules/revenue/dto/create-revenue.dto'
-import { UpdateRevenueDto } from 'src/modules/revenue/dto/update-revenue.dto'
+import { CreateRevenueDto } from './dto/create-revenue.dto'
+import { UpdateRevenueDto } from './dto/update-revenue.dto'
 // Enums
-import { PermissionsEnum } from 'src/common/enums/roles-permissions.enum'
-import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
+import { PermissionsEnum } from '../../common/enums/roles-permissions.enum'
+import { EndpointsEnum } from '../../common/enums/endpoints.enum'
 // Guards
-import { RoleGuard } from 'src/modules/role/guards/role.guard'
+import { RoleGuard } from '../role/guards/role.guard'
 // Interfaces
-import type { AuthenticatedRequest } from 'src/modules/auth/interfaces/auth.interface'
-import { MessageResponse } from 'src/common/interfaces/response.interface'
+import type { AuthenticatedRequest } from '../auth/interfaces/auth.interface'
+import { MessageResponse } from '../../common/interfaces/response.interface'
 // Schemas
-import { PopulatedRevenueDocument } from 'src/modules/revenue/schemas/revenue.schema'
+import { PopulatedRevenueDocument } from './schemas/revenue.schema'
 // Services
-import { RevenueService } from 'src/modules/revenue/revenue.service'
+import { RevenueService } from './revenue.service'
 
 @Controller(EndpointsEnum.REVENUE)
 @UseGuards(RoleGuard)

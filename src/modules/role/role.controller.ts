@@ -11,23 +11,23 @@ import {
     NotFoundException,
 } from '@nestjs/common'
 // Decorators
-import { RequirePermission } from 'src/modules/permission/decorators/permission.decorator'
+import { RequirePermission } from '../permission/decorators/permission.decorator'
 // DTOs
-import { CreateRoleDto } from 'src/modules/role/dto/create-role.dto'
-import { UpdateRoleDto } from 'src/modules/role/dto/update-role.dto'
-import { AddPermissionsDto } from 'src/modules/role/dto/add-permissions.dto'
-import { RemovePermissionsDto } from 'src/modules/role/dto/remove-permissions.dto'
+import { CreateRoleDto } from './dto/create-role.dto'
+import { UpdateRoleDto } from './dto/update-role.dto'
+import { AddPermissionsDto } from './dto/add-permissions.dto'
+import { RemovePermissionsDto } from './dto/remove-permissions.dto'
 // Enums
-import { PermissionsEnum } from 'src/common/enums/roles-permissions.enum'
-import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
+import { PermissionsEnum } from '../../common/enums/roles-permissions.enum'
+import { EndpointsEnum } from '../../common/enums/endpoints.enum'
 // Guards
-import { RoleGuard } from 'src/modules/role/guards/role.guard'
+import { RoleGuard } from './guards/role.guard'
 // Interfaces
-import { MessageResponse } from 'src/common/interfaces/response.interface'
+import { MessageResponse } from '../../common/interfaces/response.interface'
 // Schemas
-import { PopulatedRoleDocument } from 'src/modules/role/schemas/role.schema'
+import { PopulatedRoleDocument } from './schemas/role.schema'
 // Services
-import { RoleService } from 'src/modules/role/role.service'
+import { RoleService } from './role.service'
 
 @Controller(EndpointsEnum.ROLE)
 @UseGuards(RoleGuard)

@@ -1,7 +1,7 @@
 // Enums
-import { NoteCategoryEnum } from 'src/common/enums/schemas.enum'
+import { NoteCategoryEnum } from '../../../common/enums/schemas.enum'
 // Interfaces
-import { MedicalDocumentsData } from 'src/modules/medical-documents/interfaces/medical-documents.interface'
+import { MedicalDocumentsData } from '../interfaces/medical-documents.interface'
 
 export type PrescriptionData = MedicalDocumentsData<
     NoteCategoryEnum.PRESCRIBED_MEDICATIONS | NoteCategoryEnum.DIAGNOSIS

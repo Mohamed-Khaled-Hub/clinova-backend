@@ -1,5 +1,5 @@
 // Decorators
-import { IsStrongPassword } from 'src/common/decorators/strong-password.decorator'
+import { IsStrongPassword } from '../decorators/strong-password.decorator'
 
 export class PasswordDto {
     @IsStrongPassword()

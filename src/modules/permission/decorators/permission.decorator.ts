@@ -1,7 +1,7 @@
 // Core
 import { CustomDecorator, SetMetadata } from '@nestjs/common'
 // Interfaces
-import { RequiredPermission } from 'src/modules/permission/interfaces/required-permission.interface'
+import { RequiredPermission } from '../interfaces/required-permission.interface'
 
 // Key
 export const PERMISSION_KEY = 'requiredPermission'

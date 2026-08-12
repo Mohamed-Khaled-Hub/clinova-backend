@@ -11,21 +11,21 @@ import {
     NotFoundException,
 } from '@nestjs/common'
 // Decorators
-import { RequirePermission } from 'src/modules/permission/decorators/permission.decorator'
+import { RequirePermission } from './decorators/permission.decorator'
 // DTOs
-import { CreatePermissionDto } from 'src/modules/permission/dto/create-permission.dto'
-import { UpdatePermissionDto } from 'src/modules/permission/dto/update-permission.dto'
+import { CreatePermissionDto } from './dto/create-permission.dto'
+import { UpdatePermissionDto } from './dto/update-permission.dto'
 // Enums
-import { PermissionsEnum } from 'src/common/enums/roles-permissions.enum'
-import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
+import { PermissionsEnum } from '../../common/enums/roles-permissions.enum'
+import { EndpointsEnum } from '../../common/enums/endpoints.enum'
 // Guards
-import { RoleGuard } from 'src/modules/role/guards/role.guard'
+import { RoleGuard } from '../role/guards/role.guard'
 // Interfaces
-import { MessageResponse } from 'src/common/interfaces/response.interface'
+import { MessageResponse } from '../../common/interfaces/response.interface'
 // Schemas
-import { PermissionDocument } from 'src/modules/permission/schemas/permission.schema'
+import { PermissionDocument } from './schemas/permission.schema'
 // Services
-import { PermissionService } from 'src/modules/permission/permission.service'
+import { PermissionService } from './permission.service'
 
 @Controller(EndpointsEnum.PERMISSION)
 @UseGuards(RoleGuard)

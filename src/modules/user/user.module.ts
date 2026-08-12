@@ -2,14 +2,14 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Controllers
-import { UserController } from 'src/modules/user/user.controller'
+import { UserController } from './user.controller'
 // Modules
-import { CloudinaryModule } from 'src/modules/cloudinary/cloudinary.module'
+import { CloudinaryModule } from '../cloudinary/cloudinary.module'
 // Schemas
-import { User, UserSchema } from 'src/modules/user/schemas/user.schema'
+import { User, UserSchema } from './schemas/user.schema'
 // Services
-import { UserService } from 'src/modules/user/user.service'
-import { UserSeederService } from 'src/modules/user/user-seeder.service'
+import { UserService } from './user.service'
+import { UserSeederService } from './user-seeder.service'
 
 @Module({
     imports: [

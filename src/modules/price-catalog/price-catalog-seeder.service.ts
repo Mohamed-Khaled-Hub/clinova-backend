@@ -1,11 +1,11 @@
 // Core
 import { Injectable, OnModuleInit, Logger } from '@nestjs/common'
 // Enums
-import { VisitCategoryEnum } from 'src/common/enums/schemas.enum'
+import { VisitCategoryEnum } from '../../common/enums/schemas.enum'
 // Schemas
-import { PriceCatalog } from 'src/modules/price-catalog/schemas/price-catalog.schema'
+import { PriceCatalog } from './schemas/price-catalog.schema'
 // Services
-import { PriceCatalogService } from 'src/modules/price-catalog/price-catalog.service'
+import { PriceCatalogService } from './price-catalog.service'
 
 @Injectable()
 export class PriceCatalogSeederService implements OnModuleInit {

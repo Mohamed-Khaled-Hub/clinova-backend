@@ -2,7 +2,7 @@
 import {
     VisitCategoryEnum,
     ExpenseCategoryEnum,
-} from 'src/common/enums/schemas.enum'
+} from '../../../common/enums/schemas.enum'
 
 export interface GetSummaryResponse {
     totalRevenue: number

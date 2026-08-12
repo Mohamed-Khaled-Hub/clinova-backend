@@ -18,23 +18,23 @@ import {
 } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
 // Decorators
-import { RequirePermission } from 'src/modules/permission/decorators/permission.decorator'
+import { RequirePermission } from '../permission/decorators/permission.decorator'
 // DTOs
-import { CreateUserDto } from 'src/modules/user/dto/create-user.dto'
-import { UpdateUserDto } from 'src/modules/user/dto/update-user.dto'
-import { UpdateUserRoleDto } from 'src/modules/user/dto/update-user-role.dto'
+import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
+import { UpdateUserRoleDto } from './dto/update-user-role.dto'
 // Enums
-import { PermissionsEnum } from 'src/common/enums/roles-permissions.enum'
-import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
+import { PermissionsEnum } from '../../common/enums/roles-permissions.enum'
+import { EndpointsEnum } from '../../common/enums/endpoints.enum'
 // Guards
-import { RoleGuard } from 'src/modules/role/guards/role.guard'
+import { RoleGuard } from '../role/guards/role.guard'
 // Interfaces
-import { MessageResponse } from 'src/common/interfaces/response.interface'
-import type { AuthenticatedRequest } from 'src/modules/auth/interfaces/auth.interface'
+import { MessageResponse } from '../../common/interfaces/response.interface'
+import type { AuthenticatedRequest } from '../auth/interfaces/auth.interface'
 // Schemas
-import { PopulatedUserDocument } from 'src/modules/user/schemas/user.schema'
+import { PopulatedUserDocument } from './schemas/user.schema'
 // Services
-import { UserService } from 'src/modules/user/user.service'
+import { UserService } from './user.service'
 
 @Controller(EndpointsEnum.USER)
 @UseGuards(RoleGuard)

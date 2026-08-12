@@ -11,17 +11,17 @@ import { Model, PopulateOptions, PipelineStage, Types } from 'mongoose'
 import { CreateVisitDto } from 'src/modules/visit/dto/create-visit.dto'
 import { UpdateVisitDto } from 'src/modules/visit/dto/update-visit.dto'
 // Enums
-import { RolesEnum } from 'src/common/enums/roles-permissions.enum'
-import { NoteCategoryEnum } from 'src/common/enums/schemas.enum'
+import { RolesEnum } from '../../common/enums/roles-permissions.enum'
+import { NoteCategoryEnum } from '../../common/enums/schemas.enum'
 // Schemas
 import {
     Visit,
     VisitDocument,
     PopulatedVisitDocument,
-} from 'src/modules/visit/schemas/visit.schema'
+} from './schemas/visit.schema'
 // Services
-import { UserService } from 'src/modules/user/user.service'
-import { RevenueService } from 'src/modules/revenue/revenue.service'
+import { UserService } from '../user/user.service'
+import { RevenueService } from '../revenue/revenue.service'
 
 @Injectable()
 export class VisitService {

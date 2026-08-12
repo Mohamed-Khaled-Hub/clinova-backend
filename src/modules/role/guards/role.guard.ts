@@ -7,12 +7,12 @@ import {
 } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 // Interfaces
-import type { JwtPayload } from 'src/modules/auth/interfaces/auth.interface'
-import { RequiredPermission } from 'src/modules/permission/interfaces/required-permission.interface'
+import type { JwtPayload } from '../../auth/interfaces/auth.interface'
+import { RequiredPermission } from '../../permission/interfaces/required-permission.interface'
 // Services
-import { RoleService } from 'src/modules/role/role.service'
+import { RoleService } from '../role.service'
 // Variables
-import { PERMISSION_KEY } from 'src/modules/permission/decorators/permission.decorator'
+import { PERMISSION_KEY } from '../../permission/decorators/permission.decorator'
 
 @Injectable()
 export class RoleGuard implements CanActivate {

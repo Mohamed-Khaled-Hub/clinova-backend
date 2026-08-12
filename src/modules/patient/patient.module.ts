@@ -2,14 +2,11 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Controllers
-import { PatientController } from 'src/modules/patient/patient.controller'
+import { PatientController } from './patient.controller'
 // Schemas
-import {
-    Patient,
-    PatientSchema,
-} from 'src/modules/patient/schemas/patient.schema'
+import { Patient, PatientSchema } from './schemas/patient.schema'
 // Services
-import { PatientService } from 'src/modules/patient/patient.service'
+import { PatientService } from './patient.service'
 
 @Module({
     imports: [

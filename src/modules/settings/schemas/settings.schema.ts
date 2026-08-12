@@ -2,9 +2,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument, Schema as MongooseSchema } from 'mongoose'
 // Enums
-import { LangEnum } from 'src/common/enums/schemas.enum'
+import { LangEnum } from '../../../common/enums/schemas.enum'
 // Types
-import { CustomFieldsType } from 'src/common/types/schemas.type'
+import { CustomFieldsType } from '../../../common/types/schemas.type'
 
 // Document
 export type SettingsDocument = HydratedDocument<Settings>

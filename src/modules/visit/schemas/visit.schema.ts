@@ -5,12 +5,12 @@ import { Types, HydratedDocument, Schema as MongooseSchema } from 'mongoose'
 import {
     VisitCategoryEnum,
     NoteCategoryEnum,
-} from 'src/common/enums/schemas.enum'
+} from '../../../common/enums/schemas.enum'
 // Schemas
-import { PatientDocument } from 'src/modules/patient/schemas/patient.schema'
-import { UserDocument } from 'src/modules/user/schemas/user.schema'
+import { PatientDocument } from '../../patient/schemas/patient.schema'
+import { UserDocument } from '../../user/schemas/user.schema'
 // Types
-import { CustomFieldsType } from 'src/common/types/schemas.type'
+import { CustomFieldsType } from '../../../common/types/schemas.type'
 
 // Document
 export type VisitDocument = HydratedDocument<Visit>

@@ -3,10 +3,8 @@ import 'dotenv/config'
 import { NestFactory } from '@nestjs/core'
 import { ValidationPipe, Logger } from '@nestjs/common'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
-// Filters
-import { GlobalExceptionFilter } from 'src/common/filters/global-exception/global-exception.filter'
-// Modules
-import { AppModule } from 'src/app.module'
+import { GlobalExceptionFilter } from './common/filters/global-exception/global-exception.filter'
+import { AppModule } from './app.module'
 
 // API Name
 export const apiName = 'Clinova'

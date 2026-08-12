@@ -12,17 +12,17 @@ import { CreateUserDto } from 'src/modules/user/dto/create-user.dto'
 import { UpdateUserDto } from 'src/modules/user/dto/update-user.dto'
 import { UpdateUserRoleDto } from 'src/modules/user/dto/update-user-role.dto'
 // Enums
-import { RolesEnum } from 'src/common/enums/roles-permissions.enum'
+import { RolesEnum } from '../../common/enums/roles-permissions.enum'
 // Schemas
-import { PopulatedRoleDocument } from 'src/modules/role/schemas/role.schema'
+import { PopulatedRoleDocument } from '../role/schemas/role.schema'
 import {
     User,
     UserDocument,
     PopulatedUserDocument,
-} from 'src/modules/user/schemas/user.schema'
+} from './schemas/user.schema'
 // Services
-import { RoleService } from 'src/modules/role/role.service'
-import { CloudinaryService } from 'src/modules/cloudinary/cloudinary.service'
+import { RoleService } from '../role/role.service'
+import { CloudinaryService } from '../cloudinary/cloudinary.service'
 
 @Injectable()
 export class UserService {

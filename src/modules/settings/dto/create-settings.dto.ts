@@ -8,12 +8,12 @@ import {
     IsEnum,
 } from 'class-validator'
 // Decorators
-import { IsArabic } from 'src/common/decorators/arabic.decorator'
-import { IsEgyptianPhone } from 'src/common/decorators/egyptian-phone.decorator'
+import { IsArabic } from '../../../common/decorators/arabic.decorator'
+import { IsEgyptianPhone } from '../../../common/decorators/egyptian-phone.decorator'
 // Enums
-import { LangEnum } from 'src/common/enums/schemas.enum'
+import { LangEnum } from '../../../common/enums/schemas.enum'
 // Types
-import { CustomFieldsType } from 'src/common/types/schemas.type'
+import { CustomFieldsType } from '../../../common/types/schemas.type'
 
 export class CreateSettingsDto {
     @IsOptional()

@@ -2,16 +2,10 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Schemas
-import { Visit, VisitSchema } from 'src/modules/visit/schemas/visit.schema'
-import {
-    Settings,
-    SettingsSchema,
-} from 'src/modules/settings/schemas/settings.schema'
-import { User, UserSchema } from 'src/modules/user/schemas/user.schema'
-import {
-    Patient,
-    PatientSchema,
-} from 'src/modules/patient/schemas/patient.schema'
+import { Visit, VisitSchema } from '../visit/schemas/visit.schema'
+import { Settings, SettingsSchema } from '../settings/schemas/settings.schema'
+import { User, UserSchema } from '../user/schemas/user.schema'
+import { Patient, PatientSchema } from '../patient/schemas/patient.schema'
 // Services
 import { MedicalDocumentsService } from './medical-documents.service'
 // Controllers

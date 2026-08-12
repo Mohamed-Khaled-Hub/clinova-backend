@@ -2,18 +2,18 @@
 import { Module, Global } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Controllers
-import { RoleController } from 'src/modules/role/role.controller'
+import { RoleController } from './role.controller'
 // Modules
-import { PermissionModule } from 'src/modules/permission/permission.module'
+import { PermissionModule } from '../permission/permission.module'
 // Schemas
-import { Role, RoleSchema } from 'src/modules/role/schemas/role.schema'
+import { Role, RoleSchema } from './schemas/role.schema'
 import {
     Permission,
     PermissionSchema,
-} from 'src/modules/permission/schemas/permission.schema'
+} from '../permission/schemas/permission.schema'
 // Services
-import { RoleService } from 'src/modules/role/role.service'
-import { RoleSeederService } from 'src/modules/role/role-seeder.service'
+import { RoleService } from './role.service'
+import { RoleSeederService } from './role-seeder.service'
 
 @Global()
 @Module({

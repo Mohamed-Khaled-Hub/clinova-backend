@@ -11,25 +11,25 @@ import {
     NotFoundException,
 } from '@nestjs/common'
 // Decorators
-import { RequirePermission } from 'src/modules/permission/decorators/permission.decorator'
+import { RequirePermission } from '../permission/decorators/permission.decorator'
 // DTOs
-import { CreatePriceCatalogDto } from 'src/modules/price-catalog/dto/create-price-catalog.dto'
-import { UpdatePriceCatalogDto } from 'src/modules/price-catalog/dto/update-price-catalog.dto'
+import { CreatePriceCatalogDto } from './dto/create-price-catalog.dto'
+import { UpdatePriceCatalogDto } from './dto/update-price-catalog.dto'
 // Enums
-import { VisitCategoryEnum } from 'src/common/enums/schemas.enum'
-import { PermissionsEnum } from 'src/common/enums/roles-permissions.enum'
-import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
+import { VisitCategoryEnum } from '../../common/enums/schemas.enum'
+import { PermissionsEnum } from '../../common/enums/roles-permissions.enum'
+import { EndpointsEnum } from '../../common/enums/endpoints.enum'
 // Guards
-import { RoleGuard } from 'src/modules/role/guards/role.guard'
+import { RoleGuard } from '../role/guards/role.guard'
 // Interfaces
 import {
     MessageResponse,
     PriceResponse,
-} from 'src/common/interfaces/response.interface'
+} from '../../common/interfaces/response.interface'
 // Schemas
-import { PriceCatalogDocument } from 'src/modules/price-catalog/schemas/price-catalog.schema'
+import { PriceCatalogDocument } from './schemas/price-catalog.schema'
 // Services
-import { PriceCatalogService } from 'src/modules/price-catalog/price-catalog.service'
+import { PriceCatalogService } from './price-catalog.service'
 
 @Controller(EndpointsEnum.PRICE_CATALOG)
 @UseGuards(RoleGuard)

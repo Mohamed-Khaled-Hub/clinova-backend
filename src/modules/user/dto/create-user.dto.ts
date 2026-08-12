@@ -9,11 +9,11 @@ import {
     Matches,
 } from 'class-validator'
 // Decorators
-import { IsArabic } from 'src/common/decorators/arabic.decorator'
+import { IsArabic } from '../../../common/decorators/arabic.decorator'
 // DTOs
-import { PasswordDto } from 'src/common/dto/password.dto'
+import { PasswordDto } from '../../../common/dto/password.dto'
 // Types
-import { CustomFieldsType } from 'src/common/types/schemas.type'
+import { CustomFieldsType } from '../../../common/types/schemas.type'
 
 export class CreateUserDto extends PasswordDto {
     @IsNotEmpty()

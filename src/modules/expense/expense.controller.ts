@@ -12,23 +12,23 @@ import {
     NotFoundException,
 } from '@nestjs/common'
 // Decorators
-import { RequirePermission } from 'src/modules/permission/decorators/permission.decorator'
+import { RequirePermission } from '../permission/decorators/permission.decorator'
 // DTOs
-import { CreateExpenseDto } from 'src/modules/expense/dto/create-expense.dto'
-import { UpdateExpenseDto } from 'src/modules/expense/dto/update-expense.dto'
+import { CreateExpenseDto } from './dto/create-expense.dto'
+import { UpdateExpenseDto } from './dto/update-expense.dto'
 // Enums
-import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
-import { ExpenseCategoryEnum } from 'src/common/enums/schemas.enum'
-import { PermissionsEnum } from 'src/common/enums/roles-permissions.enum'
+import { EndpointsEnum } from '../../common/enums/endpoints.enum'
+import { ExpenseCategoryEnum } from '../../common/enums/schemas.enum'
+import { PermissionsEnum } from '../../common/enums/roles-permissions.enum'
 // Guards
-import { RoleGuard } from 'src/modules/role/guards/role.guard'
+import { RoleGuard } from '../role/guards/role.guard'
 // Interfaces
-import { MessageResponse } from 'src/common/interfaces/response.interface'
-import type { AuthenticatedRequest } from 'src/modules/auth/interfaces/auth.interface'
+import { MessageResponse } from '../../common/interfaces/response.interface'
+import type { AuthenticatedRequest } from '../auth/interfaces/auth.interface'
 // Schemas
-import { PopulatedExpenseDocument } from 'src/modules/expense/schemas/expense.schema'
+import { PopulatedExpenseDocument } from './schemas/expense.schema'
 // Services
-import { ExpenseService } from 'src/modules/expense/expense.service'
+import { ExpenseService } from './expense.service'
 
 @Controller(EndpointsEnum.EXPENSE)
 @UseGuards(RoleGuard)

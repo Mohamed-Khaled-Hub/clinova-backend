@@ -14,18 +14,18 @@ import {
 } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
 // Decorators
-import { RequirePermission } from 'src/modules/permission/decorators/permission.decorator'
+import { RequirePermission } from '../permission/decorators/permission.decorator'
 // DTOs
-import { UpdateSettingsDto } from 'src/modules/settings/dto/update-settings.dto'
+import { UpdateSettingsDto } from './dto/update-settings.dto'
 // Enums
-import { PermissionsEnum } from 'src/common/enums/roles-permissions.enum'
-import { EndpointsEnum } from 'src/common/enums/endpoints.enum'
+import { PermissionsEnum } from '../../common/enums/roles-permissions.enum'
+import { EndpointsEnum } from '../../common/enums/endpoints.enum'
 // Guards
-import { RoleGuard } from 'src/modules/role/guards/role.guard'
+import { RoleGuard } from '../role/guards/role.guard'
 // Schemas
-import { SettingsDocument } from 'src/modules/settings/schemas/settings.schema'
+import { SettingsDocument } from './schemas/settings.schema'
 // Services
-import { SettingsService } from 'src/modules/settings/settings.service'
+import { SettingsService } from './settings.service'
 
 @Controller(EndpointsEnum.SETTINGS)
 @UseGuards(RoleGuard)

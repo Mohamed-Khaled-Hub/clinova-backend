@@ -2,15 +2,15 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 // Controllers
-import { PriceCatalogController } from 'src/modules/price-catalog/price-catalog.controller'
+import { PriceCatalogController } from './price-catalog.controller'
 // Schemas
 import {
     PriceCatalog,
     PriceCatalogSchema,
-} from 'src/modules/price-catalog/schemas/price-catalog.schema'
+} from './schemas/price-catalog.schema'
 // Services
-import { PriceCatalogService } from 'src/modules/price-catalog/price-catalog.service'
-import { PriceCatalogSeederService } from 'src/modules/price-catalog/price-catalog-seeder.service'
+import { PriceCatalogService } from './price-catalog.service'
+import { PriceCatalogSeederService } from './price-catalog-seeder.service'
 
 @Module({
     imports: [

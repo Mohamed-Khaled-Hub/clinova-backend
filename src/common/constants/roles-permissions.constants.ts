@@ -1,13 +1,10 @@
 // Enums
-import {
-    PermissionsEnum,
-    RolesEnum,
-} from 'src/common/enums/roles-permissions.enum'
+import { PermissionsEnum, RolesEnum } from '../enums/roles-permissions.enum'
 // Types
 import {
     MatrixPermissionType,
     MatrixRoleType,
-} from 'src/common/types/roles-permissions.type'
+} from '../types/roles-permissions.type'
 
 // Helpers
 const fullAccess = (permissionKey: PermissionsEnum): MatrixPermissionType => ({

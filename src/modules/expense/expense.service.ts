@@ -3,16 +3,16 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model, PopulateOptions, Types } from 'mongoose'
 // DTOs
-import { CreateExpenseDto } from 'src/modules/expense/dto/create-expense.dto'
-import { UpdateExpenseDto } from 'src/modules/expense/dto/update-expense.dto'
+import { CreateExpenseDto } from './dto/create-expense.dto'
+import { UpdateExpenseDto } from './dto/update-expense.dto'
 // Enums
-import { ExpenseCategoryEnum } from 'src/common/enums/schemas.enum'
+import { ExpenseCategoryEnum } from '../../common/enums/schemas.enum'
 // Schemas
 import {
     Expense,
     ExpenseDocument,
     PopulatedExpenseDocument,
-} from 'src/modules/expense/schemas/expense.schema'
+} from './schemas/expense.schema'
 
 @Injectable()
 export class ExpenseService {
