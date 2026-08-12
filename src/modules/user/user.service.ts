@@ -8,9 +8,9 @@ import {
 import { InjectModel } from '@nestjs/mongoose'
 import { Model, Types, PipelineStage, QueryFilter } from 'mongoose'
 // DTOs
-import { CreateUserDto } from 'src/modules/user/dto/create-user.dto'
-import { UpdateUserDto } from 'src/modules/user/dto/update-user.dto'
-import { UpdateUserRoleDto } from 'src/modules/user/dto/update-user-role.dto'
+import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
+import { UpdateUserRoleDto } from './dto/update-user-role.dto'
 // Enums
 import { RolesEnum } from '../../common/enums/roles-permissions.enum'
 // Schemas

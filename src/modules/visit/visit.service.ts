@@ -8,8 +8,8 @@ import {
 import { InjectModel } from '@nestjs/mongoose'
 import { Model, PopulateOptions, PipelineStage, Types } from 'mongoose'
 // DTOs
-import { CreateVisitDto } from 'src/modules/visit/dto/create-visit.dto'
-import { UpdateVisitDto } from 'src/modules/visit/dto/update-visit.dto'
+import { CreateVisitDto } from './dto/create-visit.dto'
+import { UpdateVisitDto } from './dto/update-visit.dto'
 // Enums
 import { RolesEnum } from '../../common/enums/roles-permissions.enum'
 import { NoteCategoryEnum } from '../../common/enums/schemas.enum'
