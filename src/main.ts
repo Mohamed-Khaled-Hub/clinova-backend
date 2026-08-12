@@ -31,7 +31,14 @@ function configureApp(
         ? T
         : never
 ) {
-    app.enableCors({})
+    app.enableCors({
+        origin: [
+            'https://clinova-frontend-nine.vercel.app',
+            'http://localhost:3000',
+        ],
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        credentials: true,
+    })
 
     const config = new DocumentBuilder()
         .setTitle(`${apiName} API`)
