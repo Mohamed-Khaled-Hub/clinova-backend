@@ -27,7 +27,14 @@ const databaseUrl = process.env.DATABASE_URL as string
 
 @Module({
     imports: [
-        MongooseModule.forRoot(databaseUrl),
+        MongooseModule.forRootAsync({
+            useFactory: () => ({
+                uri: databaseUrl,
+                bufferCommands: false,
+                serverSelectionTimeoutMS: 5000,
+                maxPoolSize: 10,
+            }),
+        }),
         PermissionModule,
         RoleModule,
         UserModule,
