@@ -6,13 +6,12 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { ExpressAdapter } from '@nestjs/platform-express'
 import express, { Request, Response } from 'express'
 import { setServers } from 'node:dns/promises'
-
 // Filters
 import { GlobalExceptionFilter } from './common/filters/global-exception/global-exception.filter'
 // Modules
 import { AppModule } from './app.module'
 
-// Override DNS for MongoDB Atlas lookups in serverless
+// DNS for MongoDB
 setServers(['8.8.8.8', '1.1.1.1'])
 
 // API Name
@@ -21,11 +20,11 @@ export const apiName = 'Clinova'
 // Logger
 const logger = new Logger(`${apiName} API`)
 
-// Express instance and caching flag for serverless
+// Express Server
 const server = express()
 let isInitialized = false
 
-// Single bootstrap configuration applied to both local & serverless runtimes
+// Configs for Bootstrap
 function configureApp(
     app: ReturnType<typeof NestFactory.create> extends Promise<infer T>
         ? T
@@ -33,8 +32,8 @@ function configureApp(
 ) {
     app.enableCors({
         origin: [
-            'https://clinova-frontend-nine.vercel.app',
-            'http://localhost:3000',
+            process.env.FRONTEND_SERVER_VERCEL,
+            process.env.FRONTEND_SERVER_LOCAL,
         ],
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         credentials: true,
@@ -62,7 +61,7 @@ function configureApp(
     )
 }
 
-// Serverless Handler Bootstrap (Vercel)
+// Bootstrap (Vercel)
 async function bootstrapServerless(): Promise<express.Express> {
     if (!isInitialized) {
         const app = await NestFactory.create(
@@ -79,17 +78,17 @@ async function bootstrapServerless(): Promise<express.Express> {
     return server
 }
 
-// Local Standalone Bootstrap (npm run start:dev)
+// Bootstrap (npm run start:dev)
 async function bootstrapLocal() {
     const app = await NestFactory.create(AppModule)
     configureApp(app)
 
-    const port = process.env.PORT ?? 3000
+    const port = process.env.PORT ?? 5000
     await app.listen(port, '0.0.0.0')
     logger.log(`Application is running on port ${port}`)
 }
 
-// Vercel Serverless Function Export
+// Run Vercel
 export default async function handler(
     req: Request,
     res: Response
@@ -98,7 +97,7 @@ export default async function handler(
     expressApp(req, res)
 }
 
-// Run standalone server ONLY if executed directly (not imported as a module by Vercel)
+// Run Locally
 if (!process.env.VERCEL) {
     bootstrapLocal().catch((err: unknown) => console.error(err))
 }
