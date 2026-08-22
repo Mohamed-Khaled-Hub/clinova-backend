@@ -95,10 +95,15 @@ export class VisitService {
         })
         const savedVisit = await createdVisit.save()
 
+        const transactionDate = createVisitDto.visitDate
+            ? new Date(createVisitDto.visitDate)
+            : savedVisit.visitDate
+
         await this.revenueService.create(
             {
                 ...revenueDetails,
                 visitId: savedVisit._id.toString(),
+                ...(transactionDate && { transactionDate }),
             },
             userId
         )
@@ -167,7 +172,6 @@ export class VisitService {
             .exec()
         const suggestions = rawResults.map((item) => item._id)
 
-        // 5. Clean arrays and perform runtime validation
         return suggestions.filter((text): text is string => {
             if (text.trim() === '') return false
 

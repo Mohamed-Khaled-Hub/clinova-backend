@@ -122,25 +122,19 @@ export class MedicalDocumentsService {
         return {
             language: settings.primaryLanguage.toLowerCase(),
             clinic: {
-                name:
-                    (isArabic
-                        ? settings.clinicNameAr
-                        : settings.clinicNameEn) || null,
+                name: settings.clinicNameAr || settings.clinicNameEn || null,
                 clinicAddress: settings.clinicAddress ?? null,
                 clinicPhones: settings.clinicPhones,
                 logoUrl: settings.logoUrl ?? null,
                 secondaryLogoUrl: settings.secondaryLogoUrl ?? null,
                 watermarkUrl: settings.watermarkUrl ?? null,
                 doctorName:
-                    (isArabic ? doctor.fullNameAr : doctor.fullNameEn) ||
-                    doctor.username,
+                    doctor.fullNameAr || doctor.fullNameEn || doctor.username,
                 specialization:
-                    (isArabic
-                        ? doctor.specializationAr
-                        : doctor.specializationEn) || null,
+                    doctor.specializationAr || doctor.specializationEn || null,
             },
             patient: {
-                name: isArabic ? patient.fullNameAr : patient.fullNameEn,
+                name: patient.fullNameAr || patient.fullNameEn || '',
                 age: this.calculateAge(patient.dob),
             },
             visit: {

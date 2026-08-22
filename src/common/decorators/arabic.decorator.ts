@@ -9,7 +9,7 @@ export function IsArabic(
 ) {
     return applyDecorators(
         IsString(validationOptions),
-        Matches(/^[\p{Script=Arabic}\s]+$/u, {
+        Matches(/^(?![a-zA-Z])[\p{Script=Arabic}\p{P}\p{S}\p{N}\s]+$/u, {
             ...validationOptions,
             message: `${fieldName} must contain only Arabic characters, numerals, and spaces.`,
         })
