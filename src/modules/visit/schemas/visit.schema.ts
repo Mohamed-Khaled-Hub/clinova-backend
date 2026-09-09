@@ -1,14 +1,21 @@
 // Core
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { Types, HydratedDocument, Schema as MongooseSchema } from 'mongoose'
+import {
+    Types,
+    HydratedDocument,
+    Schema as MongooseSchema,
+    Query,
+    Model,
+} from 'mongoose'
 // Enums
 import {
     VisitCategoryEnum,
     NoteCategoryEnum,
 } from '../../../common/enums/schemas.enum'
 // Schemas
-import { PatientDocument } from '../../patient/schemas/patient.schema'
 import { UserDocument } from '../../user/schemas/user.schema'
+import { RevenueDocument } from '../../revenue/schemas/revenue.schema'
+import { PatientDocument } from '../../patient/schemas/patient.schema'
 // Types
 import { CustomFieldsType } from '../../../common/types/schemas.type'
 
@@ -105,3 +112,17 @@ export class Visit {
 export const VisitSchema = SchemaFactory.createForClass(Visit)
 
 VisitSchema.index({ 'notes.noteText': 1 })
+
+VisitSchema.pre(
+    ['findOneAndDelete', 'deleteOne'],
+    { document: false, query: true },
+    async function (this: Query<VisitDocument | null, VisitDocument>) {
+        const model = this.model as Model<VisitDocument>
+        const doc = await model.findOne(this.getFilter())
+        if (doc) {
+            await this.model.db
+                .model<RevenueDocument>('Revenue')
+                .deleteMany({ visitId: doc._id })
+        }
+    }
+)
