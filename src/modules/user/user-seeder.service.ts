@@ -11,7 +11,7 @@ import { RoleService } from '../role/role.service'
 
 config()
 
-const usersDefaultPassword = process.env.USERS_DEFAULT_PASSWORD as string
+const usersDefaultPassword = process.env.USERS_DEFAULT_PASSWORD || 'Password123'
 
 @Injectable()
 export class UserSeederService implements OnModuleInit {
