@@ -64,16 +64,21 @@ function configureApp(
 // Bootstrap (Vercel)
 async function bootstrapServerless(): Promise<express.Express> {
     if (!isInitialized) {
-        const app = await NestFactory.create(
-            AppModule,
-            new ExpressAdapter(server)
-        )
+        try {
+            const app = await NestFactory.create(
+                AppModule,
+                new ExpressAdapter(server)
+            )
 
-        configureApp(app)
-        await app.init()
+            configureApp(app)
+            await app.init()
 
-        isInitialized = true
-        logger.log('Application serverless instance initialized')
+            isInitialized = true
+            logger.log('Application serverless instance initialized')
+        } catch (error) {
+            logger.error('Failed to initialize serverless app', error)
+            throw error
+        }
     }
     return server
 }
