@@ -1,4 +1,5 @@
 // Core
+import { config } from 'dotenv'
 import { Injectable, OnModuleInit, Logger } from '@nestjs/common'
 // DTOs
 import { CreateUserDto } from './dto/create-user.dto'
@@ -7,6 +8,10 @@ import { RolesEnum } from '../../common/enums/roles-permissions.enum'
 // Services
 import { UserService } from './user.service'
 import { RoleService } from '../role/role.service'
+
+config()
+
+const usersDefaultPassword = process.env.USERS_DEFAULT_PASSWORD as string
 
 @Injectable()
 export class UserSeederService implements OnModuleInit {
@@ -90,7 +95,7 @@ export class UserSeederService implements OnModuleInit {
 
             const createUserDto: CreateUserDto = {
                 username: account.username,
-                password: process.env.USERS_DEFAULT_PASSWORD as string,
+                password: usersDefaultPassword,
                 roleId: String(dbRole._id),
                 fullNameEn: account.fullNameEn,
                 fullNameAr: account.fullNameAr,
