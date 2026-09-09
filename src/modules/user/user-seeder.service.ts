@@ -90,7 +90,7 @@ export class UserSeederService implements OnModuleInit {
 
             const createUserDto: CreateUserDto = {
                 username: account.username,
-                password: 'Password123',
+                password: process.env.USERS_DEFAULT_PASSWORD as string,
                 roleId: String(dbRole._id),
                 fullNameEn: account.fullNameEn,
                 fullNameAr: account.fullNameAr,
