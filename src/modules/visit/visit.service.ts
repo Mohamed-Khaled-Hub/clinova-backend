@@ -129,26 +129,69 @@ export class VisitService {
         search?: string,
         category?: NoteCategoryEnum
     ): Promise<string[]> {
+        const categoryGroups: Record<NoteCategoryEnum, NoteCategoryEnum[]> = {
+            [NoteCategoryEnum.CURRENT_MEDICATIONS]: [
+                NoteCategoryEnum.CURRENT_MEDICATIONS,
+                NoteCategoryEnum.PRESCRIBED_MEDICATIONS,
+            ],
+            [NoteCategoryEnum.PRESCRIBED_MEDICATIONS]: [
+                NoteCategoryEnum.PRESCRIBED_MEDICATIONS,
+                NoteCategoryEnum.CURRENT_MEDICATIONS,
+            ],
+            [NoteCategoryEnum.PAST_LAB_TESTS]: [
+                NoteCategoryEnum.PAST_LAB_TESTS,
+                NoteCategoryEnum.REQUESTED_LAB_TESTS,
+            ],
+            [NoteCategoryEnum.REQUESTED_LAB_TESTS]: [
+                NoteCategoryEnum.REQUESTED_LAB_TESTS,
+                NoteCategoryEnum.PAST_LAB_TESTS,
+            ],
+            [NoteCategoryEnum.PAST_RADIOLOGY]: [
+                NoteCategoryEnum.PAST_RADIOLOGY,
+                NoteCategoryEnum.REQUESTED_RADIOLOGY,
+            ],
+            [NoteCategoryEnum.REQUESTED_RADIOLOGY]: [
+                NoteCategoryEnum.REQUESTED_RADIOLOGY,
+                NoteCategoryEnum.PAST_RADIOLOGY,
+            ],
+            [NoteCategoryEnum.COMPLAINT]: [
+                NoteCategoryEnum.COMPLAINT,
+                NoteCategoryEnum.HISTORY,
+            ],
+            [NoteCategoryEnum.HISTORY]: [
+                NoteCategoryEnum.HISTORY,
+                NoteCategoryEnum.COMPLAINT,
+            ],
+            [NoteCategoryEnum.EXAMINATION]: [NoteCategoryEnum.EXAMINATION],
+            [NoteCategoryEnum.DIAGNOSIS]: [NoteCategoryEnum.DIAGNOSIS],
+            [NoteCategoryEnum.TODO]: [NoteCategoryEnum.TODO],
+            [NoteCategoryEnum.OTHER]: [NoteCategoryEnum.OTHER],
+        }
+
+        const targetCategories = category ? categoryGroups[category] : undefined
+
         const pipeline: PipelineStage[] = []
 
-        const matchCriteria: Record<string, any> = {}
-        if (category || search) {
-            const elemCriteria: Record<string, any> = {}
-            if (category) elemCriteria['category'] = category
-            if (search)
-                elemCriteria['noteText'] = {
-                    $regex: `^${search}`,
-                    $options: 'i',
-                }
-
-            matchCriteria['notes'] = { $elemMatch: elemCriteria }
+        const elemCriteria: Record<string, any> = {}
+        if (targetCategories) {
+            elemCriteria['category'] = { $in: targetCategories }
         }
-        pipeline.push({ $match: matchCriteria })
+        if (search) {
+            elemCriteria['noteText'] = {
+                $regex: `^${search}`,
+                $options: 'i',
+            }
+        }
+
+        if (Object.keys(elemCriteria).length > 0) {
+            pipeline.push({ $match: { notes: { $elemMatch: elemCriteria } } })
+        }
+
         pipeline.push({ $unwind: '$notes' })
 
         const finalMatchCriteria: Record<string, any> = {}
-        if (category) {
-            finalMatchCriteria['notes.category'] = category
+        if (targetCategories) {
+            finalMatchCriteria['notes.category'] = { $in: targetCategories }
         }
         if (search) {
             finalMatchCriteria['notes.noteText'] = {
@@ -170,10 +213,11 @@ export class VisitService {
         const rawResults = await this.visitModel
             .aggregate<{ _id: string }>(pipeline)
             .exec()
+
         const suggestions = rawResults.map((item) => item._id)
 
         return suggestions.filter((text): text is string => {
-            if (text.trim() === '') return false
+            if (!text || text.trim() === '') return false
 
             if (search) {
                 return text.toLowerCase().startsWith(search.toLowerCase())
